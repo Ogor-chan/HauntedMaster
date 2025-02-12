@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthTestAttack : Attack
+public class AOEWaterAttackTest : Attack
 {
-    public EarthTestAttack()
+    public AOEWaterAttackTest()
     {
-        Name = "EarthTestAttack";
-        EnergyCost = 1;
+        Name = "AoeWaterAttackTest";
+        EnergyCost = 2;
         Damage = 2;
-        AttackElement = Element.earth;
+        AttackElement = Element.water;
         Cooldown = 0;
         CurrentCooldown = 0;
     }

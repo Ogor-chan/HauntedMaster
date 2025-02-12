@@ -13,7 +13,6 @@ public class Utilities : MonoBehaviour
         int randomAddit = UnityEngine.Random.Range(-1, 2);
 
 
-
         damageDealt = Mathf.Max(dealer.Damage + randomAddit,1) * usedAttack.Damage * elementMultiplier;
 
 
@@ -24,7 +23,7 @@ public class Utilities : MonoBehaviour
     public static void DealDamage(Character target, int Damage)
     {
         target.CurrentHP -= Damage;
-        //print(target.name + " has received " + Damage + " damage!");
+        print(target.Name + " has received " + Damage + " damage!");
 
         CheckDamage?.Invoke();
     }

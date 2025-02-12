@@ -14,6 +14,6 @@ public abstract class Attack
     public int Cooldown { get; set; }
     public int CurrentCooldown;
 
-    public abstract void ExecuteAttack(Character target, int damage);
+    public abstract void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack);
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public enum BattleState
 {
@@ -32,6 +33,8 @@ public class BattleHandler : MonoBehaviour
     private int CurrentEnergy;
 
     private bool isTurnOver;
+    private bool Choosen = true;
+    private Character[] TempCharArray = new Character[1];
 
     private void Awake()
     {
@@ -62,8 +65,19 @@ public class BattleHandler : MonoBehaviour
 
                 //ACTIVATE START OF TURN EFFECTS FOR PLAYER
                 print("START OF PLAYER TURN");
+                CheckHP();
+                ActivateStatus(StatusE.stun);
+                if (activeCharacter.stunned)
+                {
+                    activeCharacter.stunned = false;
+                    currentBattleState = BattleState.EndOfPlayerTurn;
+                }
+                else
+                {
+                    currentBattleState = BattleState.PlayerTurn;
 
-                currentBattleState = BattleState.PlayerTurn;
+                }
+
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.PlayerTurn:
@@ -81,11 +95,13 @@ public class BattleHandler : MonoBehaviour
                 //ACTIVATE END OF TURN EFFECTS FOR PLAYER
                 print("END OF PLAYER TURN");
 
+                ActivateStatus(StatusE.burn);
+
                 CurrentEnergy = MaxEnergy;
                 NextCharacter();
-                if (activeCharacter.IsPlayer){ currentBattleState = BattleState.StartOfPlayerTurn; }
-                else{ currentBattleState = BattleState.StartOfMonsterTurn; }
-                if(turnOrder.Count == 1) { currentBattleState = BattleState.EndOfBattle; }
+                if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn; }
+                else { currentBattleState = BattleState.StartOfMonsterTurn; }
+                if (turnOrder.Count == 1) { currentBattleState = BattleState.EndOfBattle; }
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.StartOfMonsterTurn:
@@ -93,7 +109,17 @@ public class BattleHandler : MonoBehaviour
                 //ACTIVATE START OF TURN EFFECTS FOR ACTIVE MONSTER
                 print("START OF MONSTER TURN");
 
-                currentBattleState = BattleState.MonsterTurn;
+                ActivateStatus(StatusE.stun);
+                if (activeCharacter.stunned)
+                {
+                    activeCharacter.stunned = false;
+                    currentBattleState = BattleState.EndOfMonsterTurn;
+                }
+                else
+                {
+                    currentBattleState = BattleState.MonsterTurn;
+
+                }
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.MonsterTurn:
@@ -111,6 +137,8 @@ public class BattleHandler : MonoBehaviour
 
                 //ACTIVATE END OF TURN EFFECTS FOR ACTIVE MONSTER
                 print("END OF MONSTER TURN");
+
+                ActivateStatus(StatusE.burn);
 
                 NextCharacter();
                 if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn; }
@@ -144,7 +172,7 @@ public class BattleHandler : MonoBehaviour
     }
 
     private void CheckHP()
-    {   
+    {
         playerHPText.text = playerCharacter.CurrentHP + "/" + playerCharacter.MaxHP;
         for (int i = 0; i < monsterCharacters.Count; i++)
         {
@@ -156,30 +184,32 @@ public class BattleHandler : MonoBehaviour
     public void TestAttack1()
     {
         Attack usedAttack = playerCharacter.myAttacks[0];
-        if(CurrentEnergy< usedAttack.EnergyCost)
-        {
-            return;
-        }
-
-        CurrentEnergy -= usedAttack.EnergyCost;
-        print("Player is using NeutralTestAttack");
-        Character targetMonster = monsterCharacters[0];
-        usedAttack.ExecuteAttack(targetMonster,
-            Utilities.CalculateDamage(playerCharacter, targetMonster, usedAttack));
-    }
-    public void TestAttack2()
-    {
-        Attack usedAttack = playerCharacter.myAttacks[1];
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
             return;
         }
 
         CurrentEnergy -= usedAttack.EnergyCost;
-        print("Player is using WaterTestAttack");
-        Character targetMonster = monsterCharacters[0];
-        usedAttack.ExecuteAttack(targetMonster,
-            Utilities.CalculateDamage(playerCharacter, targetMonster, usedAttack));
+        print("Player is using NeutralTestAttack");
+        Character[] targetMonster = new Character[1];
+
+        StartCoroutine(TargetChoice(targetMonster, usedAttack));
+    }
+
+    public void TestAttack2()
+    {
+        Attack usedAttack = playerCharacter.myAttacks[1];
+
+        if (CurrentEnergy < usedAttack.EnergyCost)
+        {
+            return;
+        }
+
+        CurrentEnergy -= usedAttack.EnergyCost;
+        print("Player is using AOEWaterTestAttack");
+        Character[] targetMonster = monsterCharacters.ToArray();
+
+        StartCoroutine(TargetChoice(targetMonster, usedAttack));
     }
     public void TestAttack3()
     {
@@ -191,22 +221,98 @@ public class BattleHandler : MonoBehaviour
 
         CurrentEnergy -= usedAttack.EnergyCost;
         print("Player is using EarthTestAttack");
-        Character targetMonster = monsterCharacters[0];
-        usedAttack.ExecuteAttack(targetMonster,
-            Utilities.CalculateDamage(playerCharacter, targetMonster, usedAttack));
+        Character[] targetMonster = new Character[1];
+
+        StartCoroutine(TargetChoice(targetMonster, usedAttack));
     }
 
     public void MonsterAttack()
     {
         print("Fire slime is using NeutralTestAttack");
-        Character target = playerCharacter;
+        Character[] target = new Character[1];
+        target[0] = playerCharacter;
         monsterCharacters[0].myAttacks[0].ExecuteAttack(target,
-            Utilities.CalculateDamage(monsterCharacters[0], target, monsterCharacters[0].myAttacks[0]));
+            monsterCharacters[0], monsterCharacters[0].myAttacks[0]);
+
+        print("Earth slime is using EarthTestAttack");
+        monsterCharacters[1].myAttacks[0].ExecuteAttack(target,
+            monsterCharacters[1], monsterCharacters[1].myAttacks[0]);
+
         isTurnOver = true;
+    }
+
+
+    public IEnumerator TargetChoice(Character[] targets, Attack usedAttack)
+    {
+        Choosen = false;
+
+        if(targets[0] != null)
+        {
+            Choosen = true;
+        }
+
+        yield return new WaitUntil(() => Choosen);
+
+        targets[0] = TempCharArray[0];
+        usedAttack.ExecuteAttack(targets, playerCharacter, usedAttack);
+
+    }
+
+
+    public void TargetChoiceClick(int position)
+    {
+        TempCharArray[0] = null;
+        if (!Choosen)
+        {
+            foreach (var item in monsterCharacters)
+            {
+                if (item.WhichPosition == position)
+                {
+                    TempCharArray[0] = item;
+                    Choosen = true;
+                }
+            }
+        }
     }
 
     public void EndTurnButton()
     {
         isTurnOver = true;
+    }
+
+    public void ActivateStatus(StatusE effect)
+    {
+        switch (effect)
+        {
+            case StatusE.burn:
+                if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
+                {
+                    var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
+                    activeCharacter.CurrentHP =- 2;
+                    CheckHP();
+                    thisStatusEffect.stack--;
+                    print("Burn");
+
+                    if (thisStatusEffect.stack <= 0)
+                    {
+                        activeCharacter.StatusEffectList.Remove(thisStatusEffect);
+                    }
+                }
+                break;
+            case StatusE.stun:
+                if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
+                {
+                    var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
+                    activeCharacter.stunned = true;
+                    thisStatusEffect.stack--;
+                    print("Stun");
+
+                    if (thisStatusEffect.stack <= 0)
+                    {
+                        activeCharacter.StatusEffectList.Remove(thisStatusEffect);
+                    }
+                }
+                break;
+        }
     }
 }

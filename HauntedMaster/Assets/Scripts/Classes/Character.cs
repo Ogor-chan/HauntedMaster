@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Character
 {
-    public string name;
+    public string Name;
 
     public int CurrentHP;
     public int MaxHP;
@@ -16,11 +16,14 @@ public class Character
 
     public bool IsPlayer;
     public int WhichPosition;
+    public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
+    public bool stunned;
 
     public List<Attack> myAttacks = new List<Attack>();
 
-    public Character(int maxHP, int damage, int armour, int speed, Element myElement, int whichPosition)
+    public Character(string name,int maxHP, int damage, int armour, int speed, Element myElement, int whichPosition)
     {
+        Name = name;
         CurrentHP = maxHP;
         MaxHP = maxHP;
         Damage = damage;
