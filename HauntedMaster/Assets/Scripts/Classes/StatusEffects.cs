@@ -4,8 +4,13 @@ using UnityEngine;
 
 public enum StatusE
 {
+    strength,
+    weakness,
+    armored,
+    rip,
     burn,
-    stun
+    stun,
+    mud
 }
 
 public class StatusEffects

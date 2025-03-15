@@ -18,7 +18,7 @@ public enum BattleState
 
 public class BattleHandler : MonoBehaviour
 {
-    public Character playerCharacter;
+    public List<Character> playerCharacters = new List<Character>();
     public List<Character> monsterCharacters;
     public List<Character> turnOrder;
     public List<TMP_Text> monsterHPText;
@@ -55,10 +55,7 @@ public class BattleHandler : MonoBehaviour
                 //ACTIVATE START OF BATTLE EFFECTS
                 print("START OF BATTLE");
 
-                if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn;
-                    print("STARTING CHAR IS PLAYER");
-                }
-                else { currentBattleState = BattleState.StartOfMonsterTurn; }
+                NextCharTurn();
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.StartOfPlayerTurn:
@@ -67,16 +64,6 @@ public class BattleHandler : MonoBehaviour
                 print("START OF PLAYER TURN");
                 CheckHP();
                 ActivateStatus(StatusE.stun);
-                if (activeCharacter.stunned)
-                {
-                    activeCharacter.stunned = false;
-                    currentBattleState = BattleState.EndOfPlayerTurn;
-                }
-                else
-                {
-                    currentBattleState = BattleState.PlayerTurn;
-
-                }
 
                 StartCoroutine(CheckBattleState());
                 break;
@@ -96,12 +83,12 @@ public class BattleHandler : MonoBehaviour
                 print("END OF PLAYER TURN");
 
                 ActivateStatus(StatusE.burn);
+                ActivateStatus(StatusE.mud);
 
                 CurrentEnergy = MaxEnergy;
                 NextCharacter();
-                if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn; }
-                else { currentBattleState = BattleState.StartOfMonsterTurn; }
-                if (turnOrder.Count == 1) { currentBattleState = BattleState.EndOfBattle; }
+                NextCharTurn();
+
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.StartOfMonsterTurn:
@@ -110,16 +97,7 @@ public class BattleHandler : MonoBehaviour
                 print("START OF MONSTER TURN");
 
                 ActivateStatus(StatusE.stun);
-                if (activeCharacter.stunned)
-                {
-                    activeCharacter.stunned = false;
-                    currentBattleState = BattleState.EndOfMonsterTurn;
-                }
-                else
-                {
-                    currentBattleState = BattleState.MonsterTurn;
 
-                }
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.MonsterTurn:
@@ -128,6 +106,7 @@ public class BattleHandler : MonoBehaviour
                 print("MONSTER TURN");
 
                 MonsterAttack();
+                isTurnOver = true;
                 yield return new WaitUntil(() => isTurnOver);
                 isTurnOver = false;
                 currentBattleState = BattleState.EndOfMonsterTurn;
@@ -139,11 +118,11 @@ public class BattleHandler : MonoBehaviour
                 print("END OF MONSTER TURN");
 
                 ActivateStatus(StatusE.burn);
+                ActivateStatus(StatusE.mud);
 
                 NextCharacter();
-                if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn; }
-                else { currentBattleState = BattleState.StartOfMonsterTurn; }
-                if (turnOrder.Count == 1) { currentBattleState = BattleState.EndOfBattle; }
+                NextCharTurn();
+
                 StartCoroutine(CheckBattleState());
                 break;
             case BattleState.EndOfBattle:
@@ -173,7 +152,7 @@ public class BattleHandler : MonoBehaviour
 
     private void CheckHP()
     {
-        playerHPText.text = playerCharacter.CurrentHP + "/" + playerCharacter.MaxHP;
+        playerHPText.text = playerCharacters[0].CurrentHP + "/" + playerCharacters[0].MaxHP;
         for (int i = 0; i < monsterCharacters.Count; i++)
         {
             monsterHPText[i].text = monsterCharacters[i].CurrentHP + "/" + monsterCharacters[i].MaxHP;
@@ -181,9 +160,14 @@ public class BattleHandler : MonoBehaviour
         EnergyText.text = CurrentEnergy + "/" + MaxEnergy;
     }
 
+    private void NextCharTurn()
+    {
+        if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn; }
+        else { currentBattleState = BattleState.StartOfMonsterTurn; }
+    }
     public void TestAttack1()
     {
-        Attack usedAttack = playerCharacter.myAttacks[0];
+        Attack usedAttack = playerCharacters[0].myAttacks[0];
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
             return;
@@ -198,7 +182,7 @@ public class BattleHandler : MonoBehaviour
 
     public void TestAttack2()
     {
-        Attack usedAttack = playerCharacter.myAttacks[1];
+        Attack usedAttack = playerCharacters[0].myAttacks[1];
 
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
@@ -213,7 +197,7 @@ public class BattleHandler : MonoBehaviour
     }
     public void TestAttack3()
     {
-        Attack usedAttack = playerCharacter.myAttacks[2];
+        Attack usedAttack = playerCharacters[0].myAttacks[2];
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
             return;
@@ -228,17 +212,35 @@ public class BattleHandler : MonoBehaviour
 
     public void MonsterAttack()
     {
-        print("Fire slime is using NeutralTestAttack");
-        Character[] target = new Character[1];
-        target[0] = playerCharacter;
-        monsterCharacters[0].myAttacks[0].ExecuteAttack(target,
-            monsterCharacters[0], monsterCharacters[0].myAttacks[0]);
+        RollMonsterAttack(activeCharacter);
+    }
 
-        print("Earth slime is using EarthTestAttack");
-        monsterCharacters[1].myAttacks[0].ExecuteAttack(target,
-            monsterCharacters[1], monsterCharacters[1].myAttacks[0]);
+    public void RollMonsterAttack(Character targetMonster)
+    {
+        List<int> Thresholds = new List<int>();
 
-        isTurnOver = true;
+        foreach (Attack item in targetMonster.myAttacks)
+        {
+            Thresholds.Add(item.ChanceToUse);
+        }
+
+        int Max = Thresholds.Sum();
+
+        int RandomNumber = Random.Range(0, Max + 1);
+
+        int runningTotal = 0;
+
+        foreach (Attack item in targetMonster.myAttacks)
+        {
+            runningTotal += item.ChanceToUse;
+            if (RandomNumber < runningTotal)
+            {
+                print(targetMonster.Name + " Uses " + item.Name);
+                item.ExecuteAttack(playerCharacters.ToArray(), targetMonster, item);
+                break;
+            }
+        }
+
     }
 
 
@@ -254,7 +256,7 @@ public class BattleHandler : MonoBehaviour
         yield return new WaitUntil(() => Choosen);
 
         targets[0] = TempCharArray[0];
-        usedAttack.ExecuteAttack(targets, playerCharacter, usedAttack);
+        usedAttack.ExecuteAttack(targets, playerCharacters[0], usedAttack);
 
     }
 
@@ -312,7 +314,60 @@ public class BattleHandler : MonoBehaviour
                         activeCharacter.StatusEffectList.Remove(thisStatusEffect);
                     }
                 }
+
+                    if (activeCharacter.IsPlayer)
+                    {
+                        if (activeCharacter.stunned)
+                        {
+                            activeCharacter.stunned = false;
+                            currentBattleState = BattleState.EndOfPlayerTurn;
+                        }
+                        else
+                        {
+                            currentBattleState = BattleState.PlayerTurn;
+
+                        }
+                    }
+                    else
+                    {
+                        if (activeCharacter.stunned)
+                        {
+                            activeCharacter.stunned = false;
+                            currentBattleState = BattleState.EndOfMonsterTurn;
+                        }
+                        else
+                        {
+                            currentBattleState = BattleState.MonsterTurn;
+
+                        }
+                    }
                 break;
+            case StatusE.mud:
+                if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
+                {
+                    var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
+                    activeCharacter.CurrentHP -= thisStatusEffect.stack * 2;
+                    CheckHP();
+                    activeCharacter.StatusEffectList.Remove(thisStatusEffect);
+                    print("MUD");
+                }
+                break;
+            case StatusE.strength:
+            case StatusE.weakness:
+            case StatusE.armored:
+            case StatusE.rip:
+                if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
+                {
+                    var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
+                    thisStatusEffect.stack--;
+
+                    if (thisStatusEffect.stack <= 0)
+                    {
+                        activeCharacter.StatusEffectList.Remove(thisStatusEffect);
+                    }
+                }
+                break;
+
         }
     }
 }

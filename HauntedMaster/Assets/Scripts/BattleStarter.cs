@@ -28,17 +28,21 @@ public class BattleStarter : MonoBehaviour
         playerCharacter = new Character("Player",50, 2, 0, 3, Element.neutral,0);
         playerCharacter.IsPlayer = true;
 
-        monsterCharacters.Add(new Character("Fire Slime",100, 1, 0, 2, Element.fire,4));
+        monsterCharacters.Add(new Character("Earth Fox",80, 2, 0, 1, Element.earth, 4));
+        monsterCharacters[0].myAttacks.Add(new ArmorUp());
+        monsterCharacters[0].myAttacks.Add(new RockShot());
+        monsterCharacters[0].myAttacks.Add(new PowerRockShot());
 
-        monsterCharacters.Add(new Character("Earth Slime",100, 2, 0, 1, Element.earth, 5));
+        monsterCharacters.Add(new Character("Fire Fox", 50, 3, 0, 2, Element.fire, 5));
+        monsterCharacters[1].myAttacks.Add(new Scorch());
+        monsterCharacters[1].myAttacks.Add(new Burst());
+        monsterCharacters[1].myAttacks.Add(new Flamethrower());
 
-        monsterCharacters[0].myAttacks.Add(new EarthTestAttack());
-        monsterCharacters[1].myAttacks.Add(new EarthTestAttack());
         playerCharacter.myAttacks.Add(new NeutralTestAttack());
         playerCharacter.myAttacks.Add(new AOEWaterAttackTest());
         playerCharacter.myAttacks.Add(new EarthTestAttack());
 
-        battleHandler.playerCharacter = playerCharacter;
+        battleHandler.playerCharacters.Add(playerCharacter);
         battleHandler.monsterCharacters = monsterCharacters;
 
         List<Character> turnOrder = new List<Character>();

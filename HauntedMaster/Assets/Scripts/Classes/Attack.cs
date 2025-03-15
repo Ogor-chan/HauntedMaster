@@ -13,6 +13,7 @@ public abstract class Attack
     public Element AttackElement { get; set; }
     public int Cooldown { get; set; }
     public int CurrentCooldown;
+    public int ChanceToUse;
 
     public abstract void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack);
 
