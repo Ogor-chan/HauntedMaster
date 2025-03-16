@@ -7,6 +7,7 @@ public class BattleStarter : MonoBehaviour
     public Character playerCharacter;
     public List<Character> monsterCharacters;
 
+    public EnemyLibrary Library;
 
     public BattleHandler battleHandler;
 
@@ -25,18 +26,29 @@ public class BattleStarter : MonoBehaviour
 
     private void TestBattleStarter()
     {
+        int currentEnemy = 0;
         playerCharacter = new Character("Player",50, 2, 0, 3, Element.neutral,0);
         playerCharacter.IsPlayer = true;
 
-        monsterCharacters.Add(new Character("Earth Fox",80, 2, 0, 1, Element.earth, 4));
-        monsterCharacters[0].myAttacks.Add(new ArmorUp());
-        monsterCharacters[0].myAttacks.Add(new RockShot());
-        monsterCharacters[0].myAttacks.Add(new PowerRockShot());
-
-        monsterCharacters.Add(new Character("Fire Fox", 50, 3, 0, 2, Element.fire, 5));
-        monsterCharacters[1].myAttacks.Add(new Scorch());
-        monsterCharacters[1].myAttacks.Add(new Burst());
-        monsterCharacters[1].myAttacks.Add(new Flamethrower());
+        ////////////////////////////////////////////////////////////////HOW TO CREATE ENEMIES
+        monsterCharacters.Add(Library.enemies[0].myCharacter);
+        monsterCharacters[currentEnemy].myAttacks = new List<Attack>();
+        monsterCharacters[currentEnemy].StatusEffectList = new List<StatusEffects>();
+        foreach (string name in Library.enemies[0].attackNames)
+        {
+            monsterCharacters[currentEnemy].myAttacks.Add(AttackLibrary.CreateAttack(name));
+        }
+        //////////////////////////////////////////////////////////////////////////////////////
+        currentEnemy++;
+        ////////////////////////////////////////////////////////////////HOW TO CREATE ENEMIES
+        monsterCharacters.Add(Library.enemies[1].myCharacter);
+        monsterCharacters[currentEnemy].myAttacks = new List<Attack>();
+        monsterCharacters[currentEnemy].StatusEffectList = new List<StatusEffects>();
+        foreach (string name in Library.enemies[1].attackNames)
+        {
+            monsterCharacters[currentEnemy].myAttacks.Add(AttackLibrary.CreateAttack(name));
+        }
+        //////////////////////////////////////////////////////////////////////////////////////
 
         playerCharacter.myAttacks.Add(new NeutralTestAttack());
         playerCharacter.myAttacks.Add(new AOEWaterAttackTest());

@@ -7,6 +7,7 @@ public class ArmorUp : Attack
     public ArmorUp()
     {
         Name = "ArmorUp";
+        Damage = 2;
         AttackElement = Element.earth;
         ChanceToUse = 30;
     }

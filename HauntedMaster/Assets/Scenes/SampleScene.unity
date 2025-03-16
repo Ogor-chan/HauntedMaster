@@ -1042,7 +1042,9 @@ MonoBehaviour:
     MyElement: 0
     IsPlayer: 0
     WhichPosition: 0
+    stunned: 0
   monsterCharacters: []
+  Library: {fileID: 11400000, guid: 98e14633d45731d4cb49dfc504f97fda, type: 2}
   battleHandler: {fileID: 882678584}
   positions: 0
 --- !u!4 &564561895
@@ -1173,16 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d141f0966c62f4299915486ef84cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacter:
-    Name: 
-    CurrentHP: 0
-    MaxHP: 0
-    Damage: 0
-    Armour: 0
-    Speed: 0
-    MyElement: 0
-    IsPlayer: 0
-    WhichPosition: 0
+  playerCharacters: []
   monsterCharacters: []
   turnOrder: []
   monsterHPText:
@@ -1201,6 +1194,7 @@ MonoBehaviour:
     MyElement: 0
     IsPlayer: 0
     WhichPosition: 0
+    stunned: 0
 --- !u!4 &882678585
 Transform:
   m_ObjectHideFlags: 0

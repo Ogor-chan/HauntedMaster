@@ -7,17 +7,17 @@ public class Character
 {
     public string Name;
 
-    public int CurrentHP;
+    [HideInInspector] public int CurrentHP;
     public int MaxHP;
     public int Damage;
     public int Armour;
     public int Speed;
     public Element MyElement;
 
-    public bool IsPlayer;
-    public int WhichPosition;
-    public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
-    public bool stunned;
+    [HideInInspector] public bool IsPlayer;
+    [HideInInspector] public int WhichPosition;
+    [HideInInspector] public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
+    [HideInInspector] public bool stunned;
 
     public List<Attack> myAttacks = new List<Attack>();
 
