@@ -10,7 +10,8 @@ public enum StatusE
     rip,
     burn,
     stun,
-    mud
+    mud,
+    bleed
 }
 
 public class StatusEffects

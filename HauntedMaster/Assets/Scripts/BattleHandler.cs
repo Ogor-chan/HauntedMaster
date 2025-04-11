@@ -21,8 +21,6 @@ public class BattleHandler : MonoBehaviour
     public List<Character> playerCharacters = new List<Character>();
     public List<Character> monsterCharacters;
     public List<Character> turnOrder;
-    public List<TMP_Text> monsterHPText;
-    public TMP_Text playerHPText;
     public TMP_Text EnergyText;
 
     public BattleState currentBattleState;
@@ -152,14 +150,42 @@ public class BattleHandler : MonoBehaviour
 
     private void CheckHP()
     {
-        playerHPText.text = playerCharacters[0].CurrentHP + "/" + playerCharacters[0].MaxHP;
+        for (int i = 0; i < playerCharacters.Count; i++)
+        {
+            if(playerCharacters[i].CurrentHP <= 0)
+            {
+                print("Player had Died!");
+                ///////LOSE STATE MECHANIC TBA
+            }
+            else
+            {
+                playerCharacters[i].WhichPosition.HPText.text
+    = playerCharacters[i].CurrentHP + "/" + playerCharacters[i].MaxHP;
+            }
+        }
         for (int i = 0; i < monsterCharacters.Count; i++)
         {
-            monsterHPText[i].text = monsterCharacters[i].CurrentHP + "/" + monsterCharacters[i].MaxHP;
+            if(monsterCharacters[i].CurrentHP <= 0)
+            {
+                MonsterDeath(monsterCharacters[i]);
+            }
+            else
+            {
+                monsterCharacters[i].WhichPosition.HPText.text 
+                    = monsterCharacters[i].CurrentHP + "/" + monsterCharacters[i].MaxHP;
+            }
         }
         EnergyText.text = CurrentEnergy + "/" + MaxEnergy;
     }
+    
 
+    private void MonsterDeath(Character DeadMonster)
+    {
+        print(DeadMonster.Name + " Had Died!");
+        monsterCharacters.Remove(DeadMonster);
+        DeadMonster.WhichPosition.Active = false;
+        DeadMonster.WhichPosition.PositionObject.SetActive(false);
+    }
     private void NextCharTurn()
     {
         if (activeCharacter.IsPlayer) { currentBattleState = BattleState.StartOfPlayerTurn; }
@@ -268,7 +294,7 @@ public class BattleHandler : MonoBehaviour
         {
             foreach (var item in monsterCharacters)
             {
-                if (item.WhichPosition == position)
+                if (item.WhichPosition.index == position)
                 {
                     TempCharArray[0] = item;
                     Choosen = true;

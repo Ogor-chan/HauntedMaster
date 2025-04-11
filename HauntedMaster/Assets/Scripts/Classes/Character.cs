@@ -6,6 +6,7 @@ using UnityEngine;
 public class Character
 {
     public string Name;
+    public Sprite CharacterSprite;
 
     [HideInInspector] public int CurrentHP;
     public int MaxHP;
@@ -15,13 +16,13 @@ public class Character
     public Element MyElement;
 
     [HideInInspector] public bool IsPlayer;
-    [HideInInspector] public int WhichPosition;
+    public Position WhichPosition;
     [HideInInspector] public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
     [HideInInspector] public bool stunned;
 
     public List<Attack> myAttacks = new List<Attack>();
 
-    public Character(string name,int maxHP, int damage, int armour, int speed, Element myElement, int whichPosition)
+    public Character(string name,int maxHP, int damage, int armour, int speed, Element myElement)
     {
         Name = name;
         CurrentHP = maxHP;
@@ -30,6 +31,5 @@ public class Character
         Armour = armour;
         Speed = speed;
         MyElement = myElement;
-        WhichPosition = whichPosition;
     }
 }
