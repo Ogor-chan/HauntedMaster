@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class AirBoom : Attack
+public class WaterBoom : Attack
 {
-    public AirBoom()
+    public WaterBoom()
     {
-        Name = "AirSting";
-        Damage = 3;
-        AttackElement = Element.wind;
+        Name = "WaterBoom";
+        Damage = 0;
+        AttackElement = Element.water;
         ChanceToUse = 20;
         AttackTarget = Target.Team;
     }
@@ -16,9 +16,9 @@ public class AirBoom : Attack
     {
         foreach (Character item in targets)
         {
-            item.Speed += Damage;
+            Utilities.ApplyHeal(item,15);
+            Utilities.RemoveNegativeEffects(item);
         }
-        Utilities.DealDamage(caster, 999);
     }
 
 }

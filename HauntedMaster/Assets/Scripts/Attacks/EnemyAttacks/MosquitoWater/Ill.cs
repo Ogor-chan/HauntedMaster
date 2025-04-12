@@ -1,23 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class Ill : Attack
 {
-    public Scorch()
+    public Ill()
     {
-        Name = "Scorch";
-        Damage = 2;
-        AttackElement = Element.fire;
-        ChanceToUse = 50;
+        Name = "Ill";
+        Damage = 0;
+        AttackElement = Element.water;
+        ChanceToUse = 30;
         AttackTarget = Target.Enemy;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)
     {
         Character target = targets[Random.Range(0, targets.Length)];
-        int damage = Utilities.CalculateDamage(caster, target, usedAttack);
-        Utilities.DealDamage(target, damage);
-
+        Utilities.ApplyEffect(target, StatusE.poison, 3);
     }
 
 }

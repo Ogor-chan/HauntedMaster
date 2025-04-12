@@ -9,6 +9,7 @@ public class PowerRockShot : Attack
         Damage = 2;
         AttackElement = Element.earth;
         ChanceToUse = 25;
+        AttackTarget = Target.Enemy;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)

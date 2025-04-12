@@ -8,6 +8,17 @@ public class Utilities : MonoBehaviour
 {
     public static event Action CheckDamage;
 
+    public static List<StatusE> NegativeEffects = new List<StatusE>
+    {
+        StatusE.bleed,
+        StatusE.burn,
+        StatusE.mud,
+        StatusE.stun,
+        StatusE.rip,
+        StatusE.weakness,
+        StatusE.poison
+    };
+
     public static int CalculateDamage(Character dealer, Character reciever, Attack usedAttack)
     {
         float elementMultiplier = Elements.GetEffectiveness(usedAttack.AttackElement, reciever.MyElement);
@@ -58,4 +69,54 @@ public class Utilities : MonoBehaviour
         }
     }
 
+    public static void ApplyHeal(Character target, int Amount)
+    {
+        target.CurrentHP += Amount;
+        if(target.CurrentHP > target.MaxHP)
+        {
+            target.CurrentHP = target.MaxHP;
+        }
+    }
+
+    public static void RemoveNegativeEffects(Character target)
+    {
+        foreach (StatusE item in NegativeEffects)
+        {
+            if (target.StatusEffectList.Any(e => e.status == item))
+            {
+                var thisStatusEffect = target.StatusEffectList.FirstOrDefault(e => e.status == item);
+                target.StatusEffectList.Remove(thisStatusEffect);
+            };
+        }
+    }
+
+    public static void DealDamageWithEffect(Character target, StatusEffects effect)
+    {
+        if(effect.status == StatusE.burn)
+        {
+            float elementMultiplier = Elements.GetEffectiveness(Element.fire, target.MyElement);
+            int damage = (int)(5 * elementMultiplier);
+            print(target.Name + " has recieved " + damage + " damage from " + effect.status.ToString());
+            DealDamage(target, damage);
+        }
+        else if(effect.status == StatusE.bleed)
+        {
+            int damage = 10;
+            target.CurrentHP -= damage;
+            print(target.Name + " has recieved " + damage + " damage from " + effect.status.ToString());
+        }
+        else if(effect.status == StatusE.poison)
+        {
+            int damage = effect.stack * 2;
+            print(target.Name + " has recieved " + damage + " damage from " + effect.status.ToString());
+            DealDamage(target, damage);
+        }
+        else if(effect.status == StatusE.mud)
+        {
+            int damage = effect.stack;
+            print(target.Name + " has recieved " + damage + " damage from " + effect.status.ToString());
+            DealDamage(target, damage);
+        }
+        CheckDamage?.Invoke();
+    }
 }

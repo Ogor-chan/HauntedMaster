@@ -8,6 +8,7 @@ public class Burst : Attack
         Name = "Burst";
         AttackElement = Element.fire;
         ChanceToUse = 20;
+        AttackTarget = Target.Enemy;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)

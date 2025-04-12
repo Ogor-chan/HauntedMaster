@@ -255,6 +255,7 @@ public class BattleHandler : MonoBehaviour
         int RandomNumber = Random.Range(0, Max + 1);
 
         int runningTotal = 0;
+        print(RandomNumber);
 
         foreach (Attack item in targetMonster.myAttacks)
         {
@@ -262,7 +263,15 @@ public class BattleHandler : MonoBehaviour
             if (RandomNumber < runningTotal)
             {
                 print(targetMonster.Name + " Uses " + item.Name);
-                item.ExecuteAttack(playerCharacters.ToArray(), targetMonster, item);
+
+                if(item.AttackTarget == Target.Enemy)
+                {
+                    item.ExecuteAttack(playerCharacters.ToArray(), targetMonster, item);
+                }
+                else if (item.AttackTarget == Target.Team)
+                {
+                    item.ExecuteAttack(monsterCharacters.ToArray(), targetMonster, item);
+                }
                 break;
             }
         }
@@ -316,10 +325,8 @@ public class BattleHandler : MonoBehaviour
                 if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
                 {
                     var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
-                    activeCharacter.CurrentHP =- 2;
-                    CheckHP();
+                    Utilities.DealDamageWithEffect(activeCharacter, thisStatusEffect);
                     thisStatusEffect.stack--;
-                    print("Burn");
 
                     if (thisStatusEffect.stack <= 0)
                     {
@@ -333,7 +340,6 @@ public class BattleHandler : MonoBehaviour
                     var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
                     activeCharacter.stunned = true;
                     thisStatusEffect.stack--;
-                    print("Stun");
 
                     if (thisStatusEffect.stack <= 0)
                     {
@@ -372,10 +378,7 @@ public class BattleHandler : MonoBehaviour
                 if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
                 {
                     var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
-                    activeCharacter.CurrentHP -= thisStatusEffect.stack * 2;
-                    CheckHP();
-                    activeCharacter.StatusEffectList.Remove(thisStatusEffect);
-                    print("MUD");
+                    Utilities.DealDamageWithEffect(activeCharacter, thisStatusEffect);
                 }
                 break;
             case StatusE.strength:
@@ -393,7 +396,31 @@ public class BattleHandler : MonoBehaviour
                     }
                 }
                 break;
+            case StatusE.poison:
+                if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
+                {
 
+                    var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
+                    Utilities.DealDamageWithEffect(activeCharacter, thisStatusEffect);
+                    thisStatusEffect.stack--;
+                    if (thisStatusEffect.stack <= 0)
+                    {
+                        activeCharacter.StatusEffectList.Remove(thisStatusEffect);
+                    }
+                }
+                break;
+            case StatusE.bleed:
+                if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
+                {
+                    var thisStatusEffect = activeCharacter.StatusEffectList.FirstOrDefault(e => e.status == effect);
+                    Utilities.DealDamageWithEffect(activeCharacter, thisStatusEffect);
+                    thisStatusEffect.stack--;
+                    if (thisStatusEffect.stack <= 0)
+                    {
+                        activeCharacter.StatusEffectList.Remove(thisStatusEffect);
+                    }
+                }
+                break;
         }
     }
 }

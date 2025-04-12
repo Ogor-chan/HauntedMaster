@@ -9,6 +9,7 @@ public class Flamethrower : Attack
         Damage = 1;
         AttackElement = Element.fire;
         ChanceToUse = 30;
+        AttackTarget = Target.Enemy;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)

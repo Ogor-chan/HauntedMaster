@@ -16,7 +16,14 @@ public static class AttackLibrary
         { "Burst", typeof(Burst) },
         { "Flamethrower", typeof(Flamethrower) },
         //////////////////////////////////////////////
-
+        { "AirSting", typeof(AirSting)},
+        { "AirBoom", typeof(AirBoom) },
+        { "ImSpeed", typeof(ImSpeed) },
+        //////////////////////////////////////////////
+        { "WaterSting", typeof(WaterSting)},
+        { "WaterBoom", typeof(WaterBoom) },
+        { "Ill", typeof(Ill) },
+        //////////////////////////////////////////////
     };
 
     public static Attack CreateAttack(string attackName)

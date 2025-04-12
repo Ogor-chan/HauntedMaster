@@ -11,7 +11,8 @@ public enum StatusE
     burn,
     stun,
     mud,
-    bleed
+    bleed,
+    poison
 }
 
 public class StatusEffects

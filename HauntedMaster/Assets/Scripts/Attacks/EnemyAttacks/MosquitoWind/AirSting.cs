@@ -9,6 +9,7 @@ public class AirSting : Attack
         Damage = 1;
         AttackElement = Element.wind;
         ChanceToUse = 50;
+        AttackTarget = Target.Enemy;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)

@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ArmorUp : Attack
+public class ImSpeed : Attack
 {
-    public ArmorUp()
+    public ImSpeed()
     {
-        Name = "ArmorUp";
-        Damage = 2;
-        AttackElement = Element.earth;
+        Name = "ImSpeeed";
+        Damage = 0;
+        AttackElement = Element.wind;
         ChanceToUse = 30;
         AttackTarget = Target.Enemy;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)
     {
-        caster.Armour += caster.Damage * Damage;
-        Debug.Log(caster.Name + " Gains Armor: " + (caster.Damage * Damage));
+        Utilities.ApplyEffect(caster, StatusE.strength, 1);
     }
 
 }

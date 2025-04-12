@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Target
+{
+    Enemy,
+    Team
+}
 public abstract class Attack
 {
     public string Name { get; set; }
@@ -14,6 +19,7 @@ public abstract class Attack
     public int Cooldown { get; set; }
     public int CurrentCooldown;
     public int ChanceToUse;
+    public Target AttackTarget;
 
     public abstract void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack);
 

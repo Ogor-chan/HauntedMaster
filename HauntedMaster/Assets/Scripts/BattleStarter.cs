@@ -29,6 +29,8 @@ public class BattleStarter : MonoBehaviour
 
         CreateEnemy(0);
         CreateEnemy(1);
+        CreateEnemy(2);
+        CreateEnemy(3);
 
 
         battleHandler.playerCharacters.Add(playerCharacter);
