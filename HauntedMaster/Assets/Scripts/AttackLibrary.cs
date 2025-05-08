@@ -5,6 +5,11 @@ using System;
 
 public static class AttackLibrary
 {
+
+
+    /// <summary>
+    /// TUTAJ DODAJESZ NOWO UTWORZONE ATAKI WED£UG WZORU
+    /// </summary>
     private static Dictionary<string, Type> attackRegistry = new Dictionary<string, Type>
     {
         //////////////////////////////////////////////

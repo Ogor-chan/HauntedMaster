@@ -19,6 +19,7 @@ public class WaterBoom : Attack
             Utilities.ApplyHeal(item,15);
             Utilities.RemoveNegativeEffects(item);
         }
+        Utilities.DealDamage(caster, 9999);
     }
 
 }

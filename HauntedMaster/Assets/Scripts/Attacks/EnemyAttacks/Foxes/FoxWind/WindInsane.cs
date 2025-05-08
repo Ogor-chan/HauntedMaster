@@ -1,24 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class AirBoom : Attack
+public class WaterInsane : Attack
 {
-    public AirBoom()
+    public WaterInsane()
     {
-        Name = "AirBoom";
-        Damage = 3;
+        Name = "WaterInsane";
         AttackElement = Element.wind;
-        ChanceToUse = 20;
+        Damage = 2;
+        ChanceToUse = 30;
         AttackTarget = Target.Team;
     }
 
     public override void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack)
     {
-        foreach (Character item in targets)
-        {
-            item.Speed += Damage;
-        }
-        Utilities.DealDamage(caster, 999);
+        Character target = targets[Random.Range(0, targets.Length)];
+        Utilities.ApplyEffect(target, StatusE.insane, 1);
     }
 
 }
