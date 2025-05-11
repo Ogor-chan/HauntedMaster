@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      EarthFoxSprite_0: 2599505637151207977
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

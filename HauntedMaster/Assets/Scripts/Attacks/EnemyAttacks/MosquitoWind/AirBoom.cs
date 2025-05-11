@@ -5,7 +5,7 @@ public class AirBoom : Attack
 {
     public AirBoom()
     {
-        Name = "AirSting";
+        Name = "AirBoom";
         Damage = 3;
         AttackElement = Element.wind;
         ChanceToUse = 20;

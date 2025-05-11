@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class BoarEarthAttack : Attack
 {
-    public Scorch()
+    public BoarEarthAttack()
     {
-        Name = "Scorch";
+        Name = "BoarEarthAttack";
         Damage = 2;
-        AttackElement = Element.fire;
-        ChanceToUse = 50;
+        AttackElement = Element.earth;
+        ChanceToUse = 20;
         AttackTarget = Target.Enemy;
     }
 

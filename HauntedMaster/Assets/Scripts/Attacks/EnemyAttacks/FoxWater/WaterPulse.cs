@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class WaterPulse : Attack
 {
-    public Scorch()
+    public WaterPulse()
     {
-        Name = "Scorch";
+        Name = "WaterPulse";
         Damage = 2;
-        AttackElement = Element.fire;
-        ChanceToUse = 50;
+        AttackElement = Element.water;
+        ChanceToUse = 40;
         AttackTarget = Target.Enemy;
     }
 

@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FireFoxSprite_0: 6214761391730639283
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

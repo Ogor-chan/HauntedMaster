@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wiatr komar_0: -8127573013773255489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

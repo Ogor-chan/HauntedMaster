@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class Plunder : Attack
 {
-    public Scorch()
+    public Plunder()
     {
-        Name = "Scorch";
-        Damage = 2;
-        AttackElement = Element.fire;
-        ChanceToUse = 50;
+        Name = "Plunder";
+        Damage = 1;
+        AttackElement = Element.neutral;
+        ChanceToUse = 60;
         AttackTarget = Target.Enemy;
     }
 
@@ -17,6 +16,8 @@ public class Scorch : Attack
         Character target = targets[Random.Range(0, targets.Length)];
         int damage = Utilities.CalculateDamage(caster, target, usedAttack);
         Utilities.DealDamage(target, damage);
+
+        //Jeszcze ma kraœæ 20% z³ota gracza
 
     }
 }

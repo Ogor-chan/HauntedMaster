@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      woda komar_0: 4563995354910289631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

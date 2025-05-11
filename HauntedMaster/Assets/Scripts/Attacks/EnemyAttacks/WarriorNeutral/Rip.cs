@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class Rip : Attack
 {
-    public Scorch()
+    public Rip()
     {
-        Name = "Scorch";
-        Damage = 2;
-        AttackElement = Element.fire;
-        ChanceToUse = 50;
+        Name = "Rip";
+        Damage = 1;
+        AttackElement = Element.neutral;
+        ChanceToUse = 25;
         AttackTarget = Target.Enemy;
     }
 
@@ -17,6 +16,7 @@ public class Scorch : Attack
         Character target = targets[Random.Range(0, targets.Length)];
         int damage = Utilities.CalculateDamage(caster, target, usedAttack);
         Utilities.DealDamage(target, damage);
+        Utilities.ApplyEffect(caster, StatusE.rip, 1);
 
     }
 }

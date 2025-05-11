@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class Shoot : Attack
 {
-    public Scorch()
+    public Shoot()
     {
-        Name = "Scorch";
+        Name = "Shoot";
         Damage = 2;
-        AttackElement = Element.fire;
+        AttackElement = Element.neutral;
         ChanceToUse = 50;
         AttackTarget = Target.Enemy;
     }

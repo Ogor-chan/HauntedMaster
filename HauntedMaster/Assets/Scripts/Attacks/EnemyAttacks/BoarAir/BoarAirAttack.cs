@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Scorch : Attack
+public class BoarAirAttack : Attack
 {
-    public Scorch()
+    public BoarAirAttack()
     {
-        Name = "Scorch";
-        Damage = 2;
-        AttackElement = Element.fire;
-        ChanceToUse = 50;
+        Name = "BoarAirAttack";
+        Damage = 1;
+        AttackElement = Element.wind;
+        ChanceToUse = 35;
         AttackTarget = Target.Enemy;
     }
 
@@ -20,3 +19,4 @@ public class Scorch : Attack
 
     }
 }
+
