@@ -34,6 +34,8 @@ public class BattleHandler : MonoBehaviour
     private bool Choosen = true;
     private Character[] TempCharArray = new Character[1];
 
+    private Map MapScript;
+
     private void Awake()
     {
         Utilities.CheckDamage += CheckHP;
@@ -41,6 +43,7 @@ public class BattleHandler : MonoBehaviour
 
     private void Start()
     {
+        MapScript = GameObject.Find("MapObject").GetComponent<Map>();
         BattleStarted();
     }
 
@@ -167,6 +170,7 @@ public class BattleHandler : MonoBehaviour
         {
             if(monsterCharacters[i].CurrentHP <= 0)
             {
+                print("MONSTER DIED");
                 MonsterDeath(monsterCharacters[i]);
             }
             else
@@ -185,6 +189,10 @@ public class BattleHandler : MonoBehaviour
         monsterCharacters.Remove(DeadMonster);
         DeadMonster.WhichPosition.Active = false;
         DeadMonster.WhichPosition.PositionObject.SetActive(false);
+        if (monsterCharacters.Count == 0)
+        {
+            MapScript.ShowMap();
+        }
     }
     private void NextCharTurn()
     {

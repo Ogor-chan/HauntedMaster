@@ -23,4 +23,9 @@ public abstract class Attack
 
     public abstract void ExecuteAttack(Character[] targets, Character caster, Attack usedAttack);
 
+
+    ///JAK ROBIÆ ATAKI
+    ///        Character target = targets[Random.Range(0, targets.Length)];      = Losowy target
+    ///        int DamageDealt = Utilities.CalculateDamage(caster, target, usedAttack);    = policz damage
+    ///        foreach (Character item in targets)   {}            === AOE 
 }

@@ -90,6 +90,8 @@ public class Utilities : MonoBehaviour
         }
     }
 
+
+/// NIE U¯YWAÆ
     public static void DealDamageWithEffect(Character target, StatusEffects effect)
     {
         if(effect.status == StatusE.burn)

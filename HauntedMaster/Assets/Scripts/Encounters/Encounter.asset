@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8865e5a4dc3da544a7eab063d6fb120, type: 3}
-  m_Name: EnemyLibrary
+  m_Script: {fileID: 11500000, guid: 729a2ad262b3cb947848989e906a23c8, type: 3}
+  m_Name: Encounter
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 11400000, guid: 6f46aea5945245a4fb00b4da29573692, type: 2}
-  - {fileID: 11400000, guid: f8cf7f05dc372d342b328d765a4ebf5d, type: 2}
+  - {fileID: 11400000, guid: 6ff41eefb18ed344f8322a2e4c9779db, type: 2}
   - {fileID: 11400000, guid: 97df507fec587014fa51412f222ab789, type: 2}
   - {fileID: 11400000, guid: 6ff41eefb18ed344f8322a2e4c9779db, type: 2}
-  - {fileID: 11400000, guid: c9691c221858bb44f8f343267bf9a490, type: 2}

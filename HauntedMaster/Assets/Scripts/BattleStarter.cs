@@ -20,17 +20,12 @@ public class BattleStarter : MonoBehaviour
 
     private void Start()
     {
-        TestBattleStarter();
+        GameInitiater();
     }
 
-    private void TestBattleStarter()
+    private void GameInitiater()
     {
         CreatePlayer();
-
-        CreateEnemy(0);
-        CreateEnemy(1);
-        CreateEnemy(2);
-        CreateEnemy(3);
 
 
         battleHandler.playerCharacters.Add(playerCharacter);
@@ -44,14 +39,33 @@ public class BattleStarter : MonoBehaviour
 
     }
 
-    private void CreateEnemy(int EnemyIndex)
+    public void StartFight(List<Enemy> Enemies)
     {
-        monsterCharacters.Add(Library.enemies[EnemyIndex].myCharacter);
+        foreach (Enemy item in Enemies)
+        {
+            CreateEnemy(item);
+        }
+
+
+
+        battleHandler.monsterCharacters = monsterCharacters;
+
+        List<Character> turnOrder = new List<Character>();
+        turnOrder.Add(playerCharacter);
+        foreach (var item in monsterCharacters) { turnOrder.Add(item); }
+        turnOrder.Sort((item1, item2) => item2.Speed.CompareTo(item1.Speed));
+        battleHandler.turnOrder = turnOrder;
+        battleHandler.BattleStarted();
+    }
+
+    private void CreateEnemy(Enemy spawningEnemy)
+    {
+        monsterCharacters.Add(spawningEnemy.myCharacter);
         int currentEnemy = monsterCharacters.Count - 1;
         monsterCharacters[currentEnemy].CurrentHP = monsterCharacters[currentEnemy].MaxHP;
         monsterCharacters[currentEnemy].myAttacks = new List<Attack>();
         monsterCharacters[currentEnemy].StatusEffectList = new List<StatusEffects>();
-        foreach (string name in Library.enemies[EnemyIndex].attackNames)
+        foreach (string name in spawningEnemy.attackNames)
         {
             monsterCharacters[currentEnemy].myAttacks.Add(AttackLibrary.CreateAttack(name));
         }
