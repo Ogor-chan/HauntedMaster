@@ -77,7 +77,6 @@ public class Map : MonoBehaviour
         MB = GameObject.Find("MapBehaviour").GetComponent<MapBehaviour>();
         Mother = this.transform.Find("Mother").gameObject;
         CreateMap();
-        MB.SpawnEncounter();
     }
 
     private void SpawnPoints(int t)
@@ -556,13 +555,11 @@ public class Map : MonoBehaviour
             item.Status = NodeStatus.Explorable;
         }
 
-        Mother.SetActive(false);
-        UpdateAllNodeStatus();
-
 
         switch (ClickedNode.Type)
         {
             case NodeType.Fight:
+                MB.SpawnEncounter();
                 break;
             case NodeType.Heal:
                 break;
@@ -579,7 +576,9 @@ public class Map : MonoBehaviour
                 break;
         }
 
-        //HERE CALL ACTUAL MAPNODE EVENTS
+        Mother.SetActive(false);
+        UpdateAllNodeStatus();
+
     }
 
     public void CreateMap()

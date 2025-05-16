@@ -36,6 +36,8 @@ public class BattleHandler : MonoBehaviour
 
     private Map MapScript;
 
+    private Coroutine battleStateCoroutine;
+
     private void Awake()
     {
         Utilities.CheckDamage += CheckHP;
@@ -44,7 +46,6 @@ public class BattleHandler : MonoBehaviour
     private void Start()
     {
         MapScript = GameObject.Find("MapObject").GetComponent<Map>();
-        BattleStarted();
     }
 
     public IEnumerator CheckBattleState()
@@ -57,7 +58,7 @@ public class BattleHandler : MonoBehaviour
                 print("START OF BATTLE");
 
                 NextCharTurn();
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.StartOfPlayerTurn:
 
@@ -66,7 +67,7 @@ public class BattleHandler : MonoBehaviour
                 CheckHP();
                 ActivateStatus(StatusE.stun);
 
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.PlayerTurn:
 
@@ -76,7 +77,7 @@ public class BattleHandler : MonoBehaviour
                 yield return new WaitUntil(() => isTurnOver);
                 isTurnOver = false;
                 currentBattleState = BattleState.EndOfPlayerTurn;
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.EndOfPlayerTurn:
 
@@ -90,7 +91,7 @@ public class BattleHandler : MonoBehaviour
                 NextCharacter();
                 NextCharTurn();
 
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.StartOfMonsterTurn:
 
@@ -99,7 +100,7 @@ public class BattleHandler : MonoBehaviour
 
                 ActivateStatus(StatusE.stun);
 
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.MonsterTurn:
 
@@ -111,7 +112,7 @@ public class BattleHandler : MonoBehaviour
                 yield return new WaitUntil(() => isTurnOver);
                 isTurnOver = false;
                 currentBattleState = BattleState.EndOfMonsterTurn;
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.EndOfMonsterTurn:
 
@@ -124,7 +125,7 @@ public class BattleHandler : MonoBehaviour
                 NextCharacter();
                 NextCharTurn();
 
-                StartCoroutine(CheckBattleState());
+                battleStateCoroutine = StartCoroutine(CheckBattleState());
                 break;
             case BattleState.EndOfBattle:
                 //ACTIVATE END OF BATTLE EFFECTS
@@ -135,13 +136,21 @@ public class BattleHandler : MonoBehaviour
 
     public void BattleStarted()
     {
+        if(battleStateCoroutine!= null)
+        {
+            StopCoroutine(battleStateCoroutine);
+            battleStateCoroutine = null;
+        }
+
+
         activeCharacter = turnOrder[0];
         currentBattleState = BattleState.StartOfBattle;
         isTurnOver = false;
         CurrentEnergy = MaxEnergy;
+
         CheckHP();
 
-        StartCoroutine(CheckBattleState());
+        battleStateCoroutine = StartCoroutine(CheckBattleState());
     }
 
     public void NextCharacter()

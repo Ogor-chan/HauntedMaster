@@ -32,4 +32,17 @@ public class Character
         Speed = speed;
         MyElement = myElement;
     }
+
+    public Character Clone()
+    {
+        Character copy = new Character(Name, MaxHP, Damage, Armour, Speed, MyElement);
+        copy.CharacterSprite = CharacterSprite;
+        copy.IsPlayer = IsPlayer;
+
+
+        copy.stunned = false;
+        copy.WhichPosition = null;
+
+        return copy;
+    }
 }

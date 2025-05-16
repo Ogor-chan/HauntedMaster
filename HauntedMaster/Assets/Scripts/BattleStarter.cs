@@ -41,6 +41,7 @@ public class BattleStarter : MonoBehaviour
 
     public void StartFight(List<Enemy> Enemies)
     {
+        monsterCharacters.Clear();
         foreach (Enemy item in Enemies)
         {
             CreateEnemy(item);
@@ -60,17 +61,17 @@ public class BattleStarter : MonoBehaviour
 
     private void CreateEnemy(Enemy spawningEnemy)
     {
-        monsterCharacters.Add(spawningEnemy.myCharacter);
-        int currentEnemy = monsterCharacters.Count - 1;
-        monsterCharacters[currentEnemy].CurrentHP = monsterCharacters[currentEnemy].MaxHP;
-        monsterCharacters[currentEnemy].myAttacks = new List<Attack>();
-        monsterCharacters[currentEnemy].StatusEffectList = new List<StatusEffects>();
+        Character newEnemy = spawningEnemy.myCharacter.Clone();
+        monsterCharacters.Add(newEnemy);
+        newEnemy.CurrentHP = newEnemy.MaxHP;
+        newEnemy.myAttacks = new List<Attack>();
+        newEnemy.StatusEffectList = new List<StatusEffects>();
         foreach (string name in spawningEnemy.attackNames)
         {
-            monsterCharacters[currentEnemy].myAttacks.Add(AttackLibrary.CreateAttack(name));
+            newEnemy.myAttacks.Add(AttackLibrary.CreateAttack(name));
         }
 
-        OccupyPosition(monsterCharacters[currentEnemy]);
+        OccupyPosition(newEnemy);
     }
 
     private void CreatePlayer()
@@ -128,6 +129,8 @@ public class BattleStarter : MonoBehaviour
 
             PositionsList[7].PositionObject.SetActive(true);
         }
+
+        print(TargetCharacter.Name + " Had occupied " + TargetCharacter.WhichPosition.index + "position");
     }
 
 
