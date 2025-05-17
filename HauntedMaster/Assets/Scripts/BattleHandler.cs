@@ -198,6 +198,7 @@ public class BattleHandler : MonoBehaviour
         monsterCharacters.Remove(DeadMonster);
         DeadMonster.WhichPosition.Active = false;
         DeadMonster.WhichPosition.PositionObject.SetActive(false);
+        turnOrder.Remove(DeadMonster);
         if (monsterCharacters.Count == 0)
         {
             MapScript.ShowMap();
