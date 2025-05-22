@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BattleStarter : MonoBehaviour
 {
     public Character playerCharacter;
+    public Sprite playerSprite;
     public List<Character> monsterCharacters;
     public List<Position> PositionsList = new List<Position>();
 
@@ -17,7 +18,6 @@ public class BattleStarter : MonoBehaviour
     // 1,2,3 - elemental player positions
     // 4, 5, 6, 7 - monster positions
     // 8 - boss position
-
     private void Start()
     {
         GameInitiater();
@@ -78,6 +78,7 @@ public class BattleStarter : MonoBehaviour
     {
         playerCharacter = new Character("Player", 50, 2, 0, 3, Element.neutral);
         playerCharacter.IsPlayer = true;
+        playerCharacter.CharacterSprite = playerSprite;
 
         playerCharacter.myAttacks.Add(new NeutralTestAttack());
         playerCharacter.myAttacks.Add(new AOEWaterAttackTest());

@@ -33,6 +33,11 @@ public class AttackAnimationHandler : MonoBehaviour
     [SerializeField] private RectTransform EnemyAttackingAnchor;
     [SerializeField] private RectTransform EnemyGettingAttackedAnchor;
 
+    public void Awake()
+    {
+        Utilities.AnimationEvent += InitateAnimation; 
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -42,7 +47,10 @@ public class AttackAnimationHandler : MonoBehaviour
     }
 
 
-
+    public void InitateAnimation(AttackAnimationdata AAD)
+    {
+        StartCoroutine(StartAttackAnimation(AAD));
+    }
     public IEnumerator StartAttackAnimation(AttackAnimationdata AAD)
     {
 
@@ -56,37 +64,70 @@ public class AttackAnimationHandler : MonoBehaviour
 
         if (AAD.playerAttacks)
         {
-            PlayerAnimationSprite.sprite = AAD.dealer.CharacterSprite;
-            EnemyAnimationSprite.sprite = AAD.reciever.CharacterSprite;
+            if (AAD.reciever == null)
+            {
+                EnemyAnimationObject.gameObject.SetActive(false);
+                PlayerAnimationSprite.sprite = AAD.dealer.CharacterSprite;
+                PlayerAnimationObject.position = PlayerAttackingAnchor.position;
 
-            PlayerAnimationObject.position = PlayerAttackingAnchor.position;
-            DamageTextObject.position = EnemyGettingAttackedAnchor.position;
+                DamageTextText.text = "NOT IMPLEMENTED YET FULLY";
 
+                MovePlayerCoroutine =
+                    StartCoroutine(MoveImageInDirection(PlayerAnimationObject, Vector3.right, 0.025f, 99999));
+                MoveTextCoroutine =
+                    StartCoroutine(MoveImageInDirection(DamageTextObject, new Vector3(1, 1, 0), 0.025f, 99999));
+            }
+            else
+            {
+                PlayerAnimationSprite.sprite = AAD.dealer.CharacterSprite;
+                EnemyAnimationSprite.sprite = AAD.reciever.CharacterSprite;
 
-            MovePlayerCoroutine = 
-                StartCoroutine(MoveImageInDirection(PlayerAnimationObject, Vector3.right, 0.025f, 99999));
-            MoveEnemyCoroutine =
-                StartCoroutine(MoveImageInDirection(EnemyAnimationObject, Vector3.right, 0.010f, 99999));
-            MoveTextCoroutine =
-                StartCoroutine(MoveImageInDirection(DamageTextObject, new Vector3(1, 1, 0), 0.025f, 99999));
+                PlayerAnimationObject.position = PlayerAttackingAnchor.position;
+                DamageTextObject.position = EnemyGettingAttackedAnchor.position;
+
+                DamageTextText.text = "-" + AAD.damage + "HP";
+
+                MovePlayerCoroutine =
+                    StartCoroutine(MoveImageInDirection(PlayerAnimationObject, Vector3.right, 0.025f, 99999));
+                MoveEnemyCoroutine =
+                    StartCoroutine(MoveImageInDirection(EnemyAnimationObject, Vector3.right, 0.010f, 99999));
+                MoveTextCoroutine =
+                    StartCoroutine(MoveImageInDirection(DamageTextObject, new Vector3(1, 1, 0), 0.025f, 99999));
+            }
         }
         else
         {
-            PlayerAnimationSprite.sprite = AAD.reciever.CharacterSprite;
-            EnemyAnimationSprite.sprite = AAD.dealer.CharacterSprite;
+            if(AAD.reciever == null)
+            {
+                PlayerAnimationObject.gameObject.SetActive(false);
+                EnemyAnimationSprite.sprite = AAD.dealer.CharacterSprite;
+                EnemyAnimationObject.position = EnemyAttackingAnchor.position;
 
-            EnemyAnimationObject.position = EnemyAttackingAnchor.position;
-            DamageTextObject.position = PlayerGettingAttackedAnchor.position;
+                DamageTextText.text = "NOT YET IMPLEMENTED FULLY";
 
-            MovePlayerCoroutine =
-                StartCoroutine(MoveImageInDirection(PlayerAnimationObject, Vector3.left, 0.010f, 99999));
-            MoveEnemyCoroutine =
-                StartCoroutine(MoveImageInDirection(EnemyAnimationObject, Vector3.left, 0.025f, 99999));
-            MoveTextCoroutine =
-                StartCoroutine(MoveImageInDirection(DamageTextObject, new Vector3(-1, 1, 0), 0.025f, 99999));
+                MoveEnemyCoroutine =
+                    StartCoroutine(MoveImageInDirection(EnemyAnimationObject, Vector3.left, 0.025f, 99999));
+                MoveTextCoroutine =
+                    StartCoroutine(MoveImageInDirection(DamageTextObject, new Vector3(-1, 1, 0), 0.025f, 99999));
+            }
+            else
+            {
+                PlayerAnimationSprite.sprite = AAD.reciever.CharacterSprite;
+                EnemyAnimationSprite.sprite = AAD.dealer.CharacterSprite;
+
+                EnemyAnimationObject.position = EnemyAttackingAnchor.position;
+                DamageTextObject.position = PlayerGettingAttackedAnchor.position;
+
+                DamageTextText.text = "-" + AAD.damage + "HP";
+
+                MovePlayerCoroutine =
+                    StartCoroutine(MoveImageInDirection(PlayerAnimationObject, Vector3.left, 0.010f, 99999));
+                MoveEnemyCoroutine =
+                    StartCoroutine(MoveImageInDirection(EnemyAnimationObject, Vector3.left, 0.025f, 99999));
+                MoveTextCoroutine =
+                    StartCoroutine(MoveImageInDirection(DamageTextObject, new Vector3(-1, 1, 0), 0.025f, 99999));
+            }
         }
-
-        DamageTextText.text = "-" + AAD.damage + "HP";
 
 
         yield return new WaitForSecondsRealtime(1);
@@ -95,6 +136,8 @@ public class AttackAnimationHandler : MonoBehaviour
         StopCoroutine(MoveEnemyCoroutine);
         StopCoroutine(MoveTextCoroutine);
 
+        PlayerAnimationObject.gameObject.SetActive(true);
+        EnemyAnimationObject.gameObject.SetActive(true);
         AttackAnimationPanel.SetActive(false);
     }
 

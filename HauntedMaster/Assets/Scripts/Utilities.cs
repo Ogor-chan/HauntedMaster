@@ -7,6 +7,7 @@ using System.Linq;
 public class Utilities : MonoBehaviour
 {
     public static event Action CheckDamage;
+    public static event Action<AttackAnimationdata> AnimationEvent;
 
     public static List<StatusE> NegativeEffects = new List<StatusE>
     {
@@ -120,5 +121,18 @@ public class Utilities : MonoBehaviour
             DealDamage(target, damage);
         }
         CheckDamage?.Invoke();
+    }
+
+
+    public static void PlayAttackAnimation(Character dealer, Character reciever, bool playerAttacked, int damage)
+    {
+        AttackAnimationdata AAD = new AttackAnimationdata();
+        AAD.dealer = dealer;
+        AAD.reciever = reciever;
+        AAD.playerAttacks = playerAttacked;
+        AAD.damage = damage;
+
+        AnimationEvent?.Invoke(AAD);
+
     }
 }

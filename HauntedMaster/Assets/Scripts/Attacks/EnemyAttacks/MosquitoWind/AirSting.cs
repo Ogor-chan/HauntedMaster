@@ -18,6 +18,7 @@ public class AirSting : Attack
         int damage = Utilities.CalculateDamage(caster, target, usedAttack);
         Utilities.DealDamage(target, damage);
         Utilities.ApplyEffect(target, StatusE.bleed, 2);
+        Utilities.PlayAttackAnimation(caster, target, false, damage);
     }
 
 }

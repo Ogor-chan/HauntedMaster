@@ -29,6 +29,8 @@ public class NeutralTestAttack : Attack
                 thisStatusEffect.stack = +1;
             }
             item.StatusEffectList.Add(AppliedEffect);
+
+            Utilities.PlayAttackAnimation(caster, item, true, damage);
         }
 
     }

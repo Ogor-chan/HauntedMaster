@@ -1457,14 +1457,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter:
-    Name: 
-    CharacterSprite: {fileID: 0}
+    Name: Player
+    CharacterSprite: {fileID: -8868272330977153355, guid: 78761bd6a613543489f9dcc3d314ea85, type: 3}
     CurrentHP: 0
-    MaxHP: 0
-    Damage: 0
+    MaxHP: 100
+    Damage: 2
     Armour: 0
-    Speed: 0
-    MyElement: 0
+    Speed: 10
+    MyElement: 4
     IsPlayer: 0
     WhichPosition:
       PositionObject: {fileID: 0}
@@ -1474,6 +1474,7 @@ MonoBehaviour:
       Active: 0
       ImageRenderer: {fileID: 0}
     stunned: 0
+  playerSprite: {fileID: -8868272330977153355, guid: 78761bd6a613543489f9dcc3d314ea85, type: 3}
   monsterCharacters: []
   PositionsList:
   - PositionObject: {fileID: 1676286773}
