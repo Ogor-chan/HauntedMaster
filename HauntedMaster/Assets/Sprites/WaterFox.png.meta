@@ -188,7 +188,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WaterFox_0: 3792601964301553645
+      WaterFox_1: 152391506695847052
+      WaterFox_2: 1355517850199304075
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
