@@ -16,10 +16,10 @@ MonoBehaviour:
     Name: Water Mosquito
     CharacterSprite: {fileID: 4563995354910289631, guid: 4d23c9496af6928448cd3660bb9013f3, type: 3}
     CurrentHP: 25
-    MaxHP: 25
-    Damage: 2
+    MaxHP: 15
+    Damage: 1
     Armour: 0
-    Speed: 2
+    Speed: 110
     MyElement: 1
     IsPlayer: 0
     WhichPosition:

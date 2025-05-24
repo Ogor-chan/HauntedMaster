@@ -16,10 +16,10 @@ MonoBehaviour:
     Name: BoarAir
     CharacterSprite: {fileID: 0}
     CurrentHP: 0
-    MaxHP: 0
-    Damage: 0
+    MaxHP: 40
+    Damage: 1
     Armour: 0
-    Speed: 0
+    Speed: 55
     MyElement: 3
     IsPlayer: 0
     WhichPosition:
