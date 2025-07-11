@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public enum BattleState
 {
@@ -23,6 +25,20 @@ public class BattleHandler : MonoBehaviour
     public List<Character> turnOrder;
     public TMP_Text EnergyText;
 
+    [Header("Status Bar")]
+    [SerializeField] private GameObject poisonPrefab;
+    [SerializeField] private GameObject bleedPrefab;
+    [SerializeField] private GameObject mudPrefab;
+    [SerializeField] private GameObject strengthPrefab;
+    [SerializeField] private GameObject otherPrefab;
+    [SerializeField] private Transform StatusPosition0;
+    [SerializeField] private Transform StatusPosition4;
+    [SerializeField] private Transform StatusPosition5;
+    [SerializeField] private Transform StatusPosition6;
+    [SerializeField] private Transform StatusPosition7;
+    [SerializeField] private Transform StatusPosition8;
+
+    [Header("")]
     public BattleState currentBattleState;
     public Character activeCharacter;
 
@@ -41,6 +57,7 @@ public class BattleHandler : MonoBehaviour
     private void Awake()
     {
         Utilities.CheckDamage += CheckHP;
+        
     }
 
     private void Start()
@@ -50,6 +67,8 @@ public class BattleHandler : MonoBehaviour
 
     public IEnumerator CheckBattleState()
     {
+        StatusBarCheck();
+
         switch (currentBattleState)
         {
             case BattleState.StartOfBattle:
@@ -107,6 +126,7 @@ public class BattleHandler : MonoBehaviour
                 //MONSTER TURN
                 print("MONSTER TURN");
 
+                
                 MonsterAttack();
                 isTurnOver = true;
                 yield return new WaitUntil(() => isTurnOver);
@@ -439,6 +459,273 @@ public class BattleHandler : MonoBehaviour
                     }
                 }
                 break;
+        }
+    }
+
+    public void StatusBarCheck()
+    {
+        // If po to by se schowac to wszystko
+        // Do usuwania na biezaco starych efektow
+        if (activeCharacter != null) 
+        {
+
+
+            foreach (Transform child in StatusPosition0)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in StatusPosition4)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in StatusPosition5)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in StatusPosition6)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in StatusPosition7)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in StatusPosition8)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+
+        // patrzenie statusów 
+        foreach (Character character in turnOrder)
+        {
+            foreach (StatusEffects effect in character.StatusEffectList)
+            {
+                //========================DO PATRZENIA KTO CO DAJE=======================================
+                Debug.Log("Who: "+ activeCharacter.Name +" Status Effect: " + effect.status + " Stack: " + effect.stack);
+                //Debug.Log("Player Position: " + activeCharacter.WhichPosition.PositionObject.name);
+
+                //==========================DLA POZYCJI GRACZA===========================================
+                if (activeCharacter.WhichPosition.PositionObject.name == "Position0")
+                {
+                    if (effect.status.ToString() == "bleed")
+                    {
+                        GameObject status = Instantiate(bleedPrefab, StatusPosition0);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "mud")
+                    {
+                        GameObject status = Instantiate(mudPrefab, StatusPosition0);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "poison")
+                    {
+                        GameObject status = Instantiate(poisonPrefab, StatusPosition0);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "strength")
+                    {
+                        GameObject status = Instantiate(strengthPrefab, StatusPosition0);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else
+                    {
+                        GameObject status = Instantiate(otherPrefab, StatusPosition0);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                }
+
+                //==========================DLA POZYCJI WROGA 4 =========================================
+                if (activeCharacter.WhichPosition.PositionObject.name == "Position4")
+                {
+
+                    if (effect.status.ToString() == "bleed")
+                    {
+                        GameObject status = Instantiate(bleedPrefab, StatusPosition4);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "mud")
+                    {
+                        GameObject status = Instantiate(mudPrefab, StatusPosition4);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "poison")
+                    {
+                        GameObject status = Instantiate(poisonPrefab, StatusPosition4);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "strength")
+                    {
+                        GameObject status = Instantiate(strengthPrefab, StatusPosition4);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else
+                    {
+                        GameObject status = Instantiate(otherPrefab, StatusPosition4);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                }
+
+                //==========================DLA POZYCJI WROGA 5 =========================================
+                if (activeCharacter.WhichPosition.PositionObject.name == "Position5")
+                {
+
+                    if (effect.status.ToString() == "bleed")
+                    {
+                        GameObject status = Instantiate(bleedPrefab, StatusPosition5);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "mud")
+                    {
+                        GameObject status = Instantiate(mudPrefab, StatusPosition5);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "poison")
+                    {
+                        GameObject status = Instantiate(poisonPrefab, StatusPosition5);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "strength")
+                    {
+                        GameObject status = Instantiate(strengthPrefab, StatusPosition5);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else
+                    {
+                        GameObject status = Instantiate(otherPrefab, StatusPosition5);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                }
+
+                //==========================DLA POZYCJI WROGA 6 =========================================
+                if (activeCharacter.WhichPosition.PositionObject.name == "Position6")
+                {
+
+                    if (effect.status.ToString() == "bleed")
+                    {
+                        GameObject status = Instantiate(bleedPrefab, StatusPosition6);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "mud")
+                    {
+                        GameObject status = Instantiate(mudPrefab, StatusPosition6);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "poison")
+                    {
+                        GameObject status = Instantiate(poisonPrefab, StatusPosition6);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "strength")
+                    {
+                        GameObject status = Instantiate(strengthPrefab, StatusPosition6);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else
+                    {
+                        GameObject status = Instantiate(otherPrefab, StatusPosition6);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                }
+
+                //==========================DLA POZYCJI WROGA 7 =========================================
+                if (activeCharacter.WhichPosition.PositionObject.name == "Position7")
+                {
+
+                    if (effect.status.ToString() == "bleed")
+                    {
+                        GameObject status = Instantiate(bleedPrefab, StatusPosition7);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "mud")
+                    {
+                        GameObject status = Instantiate(mudPrefab, StatusPosition7);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "poison")
+                    {
+                        GameObject status = Instantiate(poisonPrefab, StatusPosition7);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "strength")
+                    {
+                        GameObject status = Instantiate(strengthPrefab, StatusPosition7);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else
+                    {
+                        GameObject status = Instantiate(otherPrefab, StatusPosition7);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                }
+
+                //==========================DLA POZYCJI WROGA 8 =========================================
+                if (activeCharacter.WhichPosition.PositionObject.name == "Position8")
+                {
+
+                    if (effect.status.ToString() == "bleed")
+                    {
+                        GameObject status = Instantiate(bleedPrefab, StatusPosition8);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "mud")
+                    {
+                        GameObject status = Instantiate(mudPrefab, StatusPosition8);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "poison")
+                    {
+                        GameObject status = Instantiate(poisonPrefab, StatusPosition8);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else if (effect.status.ToString() == "strength")
+                    {
+                        GameObject status = Instantiate(strengthPrefab, StatusPosition8);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                    else
+                    {
+                        GameObject status = Instantiate(otherPrefab, StatusPosition8);
+                        TextMeshPro statusText = status.GetComponentInChildren<TextMeshPro>();
+                        statusText.text = effect.stack.ToString();
+                    }
+                }
+            }
         }
     }
 }
