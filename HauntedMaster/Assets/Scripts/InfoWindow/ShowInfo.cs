@@ -24,10 +24,20 @@ public class ShowInfo : MonoBehaviour
     [SerializeField] TextMeshProUGUI objectElement;
     [SerializeField] TextMeshProUGUI objectDescription;
 
+    [Header("Forms Change")]
+    [SerializeField] BattleHandler battleHandler;
+    [SerializeField] GameObject chosseForm;
+    [SerializeField] GameObject fire;
+    [SerializeField] GameObject water;
+    [SerializeField] GameObject earth;
+    [SerializeField] GameObject wind;
+    [SerializeField] GameObject neutral;
+
     // Start is called before the first frame update
     void Start()
     {
         infoWindow.SetActive(false);
+        chosseForm.SetActive(false);
     }
 
     // Update is called once per frame
@@ -95,6 +105,7 @@ public class ShowInfo : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 infoWindow.SetActive(false);
+                //chosseForm.SetActive(false);
                 timer = 0f; // Reset timer when any key is pressed
             }
 
@@ -161,5 +172,41 @@ public class ShowInfo : MonoBehaviour
         objectSpeed.text = "Cooldown: " + cd;
         objectElement.text = "Current Cooldown: " + currentCD;
         objectDescription.text = description;
+    }
+
+    //______________________________________________________________________________________________________________________________________________________
+    public void ShowChosseForm()
+    {
+        if (battleHandler.activeCharacter.Name == "Player")
+        {
+            chosseForm.SetActive(true);
+            fire.SetActive(true);
+            water.SetActive(true);
+            earth.SetActive(true);
+            wind.SetActive(true);
+            neutral.SetActive(true);
+            if(battleHandler.activeCharacter.MyElement == Element.fire)
+            {
+                fire.SetActive(false);
+            }
+            else if (battleHandler.activeCharacter.MyElement == Element.water)
+            {
+                water.SetActive(false);
+            }
+            else if (battleHandler.activeCharacter.MyElement == Element.earth)
+            {
+                earth.SetActive(false);
+            }
+            else if (battleHandler.activeCharacter.MyElement == Element.wind)
+            {
+                wind.SetActive(false);
+            }
+            else if (battleHandler.activeCharacter.MyElement == Element.neutral)
+            {
+                neutral.SetActive(false);
+            }
+        }
+            
+
     }
 }

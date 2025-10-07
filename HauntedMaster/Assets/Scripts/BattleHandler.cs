@@ -75,6 +75,11 @@ public class BattleHandler : MonoBehaviour
         print("END OF BATTLE");
     }
 
+    public void Click()
+    {
+        Debug.Log("CLICKkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    }
+
     public IEnumerator CheckBattleState()
     {
         StatusBarCheck();

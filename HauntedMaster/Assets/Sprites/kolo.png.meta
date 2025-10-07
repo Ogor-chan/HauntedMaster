@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 78761bd6a613543489f9dcc3d314ea85
+guid: 0cbc847fd0311254ea7dd80ca18ac437
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8868272330977153355
-    second: PlayerSprite_0
+      213: -5210559474800057239
+    second: kolo_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -94,29 +94,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerSprite_0
+      name: kolo_0
       rect:
         serializedVersion: 2
-        x: 258
-        y: 11
-        width: 654
-        height: 1905
+        x: 0
+        y: 0
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5be6ea41d419de480800000000000000
-      internalID: -8868272330977153355
+      spriteID: 9642f7fa3cf50b7b0800000000000000
+      internalID: -5210559474800057239
       vertices: []
       indices: 
       edges: []
@@ -141,7 +129,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerSprite_0: -8868272330977153355
+      kolo_0: -5210559474800057239
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
