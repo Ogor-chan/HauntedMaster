@@ -9,11 +9,13 @@ public class ShowInfo : MonoBehaviour
     public Vector2 mousePos;
     public RaycastHit2D hit;
     public EnemyLibrary enemyLibrary;
+    [SerializeField] BattleHandler battleHandler;
 
     public float timer = 0f;
     string name;
     string description;
     int enemyID;
+
     [Header("Info Window")]
     [SerializeField] GameObject infoWindow;
     [SerializeField] TextMeshProUGUI objectName;
@@ -25,7 +27,6 @@ public class ShowInfo : MonoBehaviour
     [SerializeField] TextMeshProUGUI objectDescription;
 
     [Header("Forms Change")]
-    [SerializeField] BattleHandler battleHandler;
     [SerializeField] GameObject chosseForm;
     [SerializeField] GameObject fire;
     [SerializeField] GameObject water;
@@ -74,18 +75,15 @@ public class ShowInfo : MonoBehaviour
                 {
                     if (hit.collider.name == "Attack1")
                     {
-                        NeutralTestAttack attack = new NeutralTestAttack();
-                        PlayerAttackInfo(attack.Name, attack.EnergyCost.ToString(), attack.Damage.ToString(), attack.AttackElement.ToString(), attack.Cooldown.ToString(), attack.CurrentCooldown.ToString());
+                        PlayerAttackInfo(battleHandler.playerCharacters[0].myAttacks[0].Name, battleHandler.playerCharacters[0].myAttacks[0].EnergyCost.ToString(), battleHandler.playerCharacters[0].myAttacks[0].Damage.ToString(), battleHandler.playerCharacters[0].myAttacks[0].AttackElement.ToString(), battleHandler.playerCharacters[0].myAttacks[0].Cooldown.ToString(), battleHandler.playerCharacters[0].myAttacks[0].CurrentCooldown.ToString());
                     }
                     else if (hit.collider.name == "Attack2")
                     {
-                        AOEWaterAttackTest attack = new AOEWaterAttackTest();
-                        PlayerAttackInfo(attack.Name, attack.EnergyCost.ToString(), attack.Damage.ToString(), attack.AttackElement.ToString(), attack.Cooldown.ToString(), attack.CurrentCooldown.ToString());
+                        PlayerAttackInfo(battleHandler.playerCharacters[0].myAttacks[1].Name, battleHandler.playerCharacters[0].myAttacks[1].EnergyCost.ToString(), battleHandler.playerCharacters[0].myAttacks[1].Damage.ToString(), battleHandler.playerCharacters[0].myAttacks[1].AttackElement.ToString(), battleHandler.playerCharacters[0].myAttacks[1].Cooldown.ToString(), battleHandler.playerCharacters[0].myAttacks[1].CurrentCooldown.ToString());
                     }
                     else if (hit.collider.name == "Attack3")
                     {
-                        EarthTestAttack attack = new EarthTestAttack();
-                        PlayerAttackInfo(attack.Name, attack.EnergyCost.ToString(), attack.Damage.ToString(), attack.AttackElement.ToString(), attack.Cooldown.ToString(), attack.CurrentCooldown.ToString());
+                        PlayerAttackInfo(battleHandler.playerCharacters[0].myAttacks[2].Name, battleHandler.playerCharacters[0].myAttacks[2].EnergyCost.ToString(), battleHandler.playerCharacters[0].myAttacks[2].Damage.ToString(), battleHandler.playerCharacters[0].myAttacks[2].AttackElement.ToString(), battleHandler.playerCharacters[0].myAttacks[2].Cooldown.ToString(), battleHandler.playerCharacters[0].myAttacks[2].CurrentCooldown.ToString());
                     }
                     
                 }
@@ -211,4 +209,6 @@ public class ShowInfo : MonoBehaviour
     {
         chosseForm.SetActive(false);
     }
+
+    
 }

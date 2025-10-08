@@ -734,4 +734,12 @@ public class BattleHandler : MonoBehaviour
     {
         EnergyText.text = CurrentEnergy + "/" + MaxEnergy; 
     }
+
+    public void AttackYouHave()
+    {
+        for (int i = 0; i < playerCharacters[0].myAttacks.Count; i++)
+        {
+            Debug.Log(playerCharacters[0].myAttacks[i].Name);
+        }
+    }
 }
