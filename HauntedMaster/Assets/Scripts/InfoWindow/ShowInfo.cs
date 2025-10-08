@@ -105,7 +105,6 @@ public class ShowInfo : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 infoWindow.SetActive(false);
-                //chosseForm.SetActive(false);
                 timer = 0f; // Reset timer when any key is pressed
             }
 
@@ -206,7 +205,10 @@ public class ShowInfo : MonoBehaviour
                 neutral.SetActive(false);
             }
         }
-            
+    }
 
+    public void CloseChosseForm()
+    {
+        chosseForm.SetActive(false);
     }
 }

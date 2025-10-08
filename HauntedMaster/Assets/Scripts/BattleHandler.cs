@@ -44,7 +44,7 @@ public class BattleHandler : MonoBehaviour
 
 
     private int MaxEnergy = 3;
-    private int CurrentEnergy;
+    public int CurrentEnergy;
 
     private bool isTurnOver;
     private bool Choosen = true;
@@ -75,10 +75,6 @@ public class BattleHandler : MonoBehaviour
         print("END OF BATTLE");
     }
 
-    public void Click()
-    {
-        Debug.Log("CLICKkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-    }
 
     public IEnumerator CheckBattleState()
     {
@@ -213,7 +209,7 @@ public class BattleHandler : MonoBehaviour
                     = monsterCharacters[i].CurrentHP + "/" + monsterCharacters[i].MaxHP;
             }
         }
-        EnergyText.text = CurrentEnergy + "/" + MaxEnergy;
+        ChangeEnergy();
     }
     
 
@@ -732,5 +728,10 @@ public class BattleHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ChangeEnergy()
+    {
+        EnergyText.text = CurrentEnergy + "/" + MaxEnergy; 
     }
 }

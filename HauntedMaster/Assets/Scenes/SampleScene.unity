@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 25217911}
   - component: {fileID: 25217914}
   - component: {fileID: 25217915}
+  - component: {fileID: 25217916}
   m_Layer: 5
   m_Name: Attack3
   m_TagString: Untagged
@@ -314,6 +315,19 @@ MonoBehaviour:
   name: 
   description: 
   enemyLibrary: {fileID: 0}
+--- !u!114 &25217916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25217909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7471b1d46283a43aa713f469cc73f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaThreshold: 0.1
 --- !u!1 &41695633
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 413.70322, y: 390.86533}
+  m_AnchoredPosition: {x: 413.70322, y: 274.82532}
   m_SizeDelta: {x: 67.8202, y: 50.0527}
   m_Pivot: {x: 6.1, y: 11.45}
 --- !u!114 &95975598
@@ -678,7 +692,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 95975600}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672009813}
+        m_TargetAssemblyTypeName: changeForm, Assembly-CSharp
+        m_MethodName: FormChange
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: earth
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1672009811}
+        m_TargetAssemblyTypeName: ShowInfo, Assembly-CSharp
+        m_MethodName: CloseChosseForm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 882678584}
+        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_MethodName: ChangeFormEnergy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &95975600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,7 +1072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 413.70322, y: 324.7726}
+  m_AnchoredPosition: {x: 413.70322, y: 208.73259}
   m_SizeDelta: {x: 67.8202, y: 50.0527}
   m_Pivot: {x: 6.1, y: 11.45}
 --- !u!114 &187038088
@@ -1081,7 +1131,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 187038090}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672009813}
+        m_TargetAssemblyTypeName: changeForm, Assembly-CSharp
+        m_MethodName: FormChange
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: wind
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1672009811}
+        m_TargetAssemblyTypeName: ShowInfo, Assembly-CSharp
+        m_MethodName: CloseChosseForm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 882678584}
+        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_MethodName: ChangeFormEnergy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &187038090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1592,6 +1678,7 @@ GameObject:
   - component: {fileID: 324940494}
   - component: {fileID: 324940497}
   - component: {fileID: 324940498}
+  - component: {fileID: 324940499}
   m_Layer: 5
   m_Name: Attack2
   m_TagString: Untagged
@@ -1772,6 +1859,19 @@ MonoBehaviour:
   name: 
   description: 
   enemyLibrary: {fileID: 0}
+--- !u!114 &324940499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324940492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7471b1d46283a43aa713f469cc73f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaThreshold: 0.1
 --- !u!1 &336853755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,7 +2043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 413.70322, y: 523.0507}
+  m_AnchoredPosition: {x: 413.70322, y: 407.0107}
   m_SizeDelta: {x: 67.8202, y: 50.0527}
   m_Pivot: {x: 6.1, y: 11.45}
 --- !u!114 &348349175
@@ -2002,7 +2102,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 348349177}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672009813}
+        m_TargetAssemblyTypeName: changeForm, Assembly-CSharp
+        m_MethodName: FormChange
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: fire
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1672009811}
+        m_TargetAssemblyTypeName: ShowInfo, Assembly-CSharp
+        m_MethodName: CloseChosseForm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 882678584}
+        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_MethodName: ChangeFormEnergy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &348349177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2802,7 +2938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 413.70322, y: 456.958}
+  m_AnchoredPosition: {x: 413.70322, y: 340.918}
   m_SizeDelta: {x: 67.8202, y: 50.0527}
   m_Pivot: {x: 6.1, y: 11.45}
 --- !u!114 &546515752
@@ -2861,7 +2997,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 546515754}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672009813}
+        m_TargetAssemblyTypeName: changeForm, Assembly-CSharp
+        m_MethodName: FormChange
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: water
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1672009811}
+        m_TargetAssemblyTypeName: ShowInfo, Assembly-CSharp
+        m_MethodName: CloseChosseForm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 882678584}
+        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_MethodName: ChangeFormEnergy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &546515754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3730,7 +3902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 413.70322, y: 258.67993}
+  m_AnchoredPosition: {x: 413.70322, y: 142.63988}
   m_SizeDelta: {x: 67.8202, y: 50.0527}
   m_Pivot: {x: 6.1, y: 11.45}
 --- !u!114 &813258572
@@ -3789,7 +3961,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 813258574}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672009813}
+        m_TargetAssemblyTypeName: changeForm, Assembly-CSharp
+        m_MethodName: FormChange
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: neutral
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1672009811}
+        m_TargetAssemblyTypeName: ShowInfo, Assembly-CSharp
+        m_MethodName: CloseChosseForm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 882678584}
+        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_MethodName: ChangeFormEnergy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &813258574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4100,6 +4308,7 @@ MonoBehaviour:
       Active: 0
       ImageRenderer: {fileID: 0}
     stunned: 0
+  CurrentEnergy: 0
 --- !u!4 &882678585
 Transform:
   m_ObjectHideFlags: 0
@@ -4371,6 +4580,7 @@ GameObject:
   - component: {fileID: 1007960711}
   - component: {fileID: 1007960714}
   - component: {fileID: 1007960715}
+  - component: {fileID: 1007960716}
   m_Layer: 5
   m_Name: Attack1
   m_TagString: Untagged
@@ -4551,6 +4761,19 @@ MonoBehaviour:
   name: 
   description: 
   enemyLibrary: {fileID: 0}
+--- !u!114 &1007960716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007960709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7471b1d46283a43aa713f469cc73f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaThreshold: 0.1
 --- !u!1 &1008911333
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,6 +5825,138 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271359198}
   m_CullTransparentMesh: 1
+--- !u!1 &1287478903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287478904}
+  - component: {fileID: 1287478907}
+  - component: {fileID: 1287478906}
+  - component: {fileID: 1287478905}
+  m_Layer: 5
+  m_Name: Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1287478904
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287478903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1512650608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 441, y: -67}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1287478905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287478903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1287478906}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1672009811}
+        m_TargetAssemblyTypeName: ShowInfo, Assembly-CSharp
+        m_MethodName: CloseChosseForm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1287478906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287478903}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.41960785}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1287478907
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287478903}
+  m_CullTransparentMesh: 1
 --- !u!1 &1313931566
 GameObject:
   m_ObjectHideFlags: 0
@@ -6569,6 +6924,42 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!1 &1512650607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512650608}
+  m_Layer: 5
+  m_Name: exitBtn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1512650608
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512650607}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1287478904}
+  m_Father: {fileID: 2144936652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1522333119
 GameObject:
   m_ObjectHideFlags: 0
@@ -7450,6 +7841,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1672009812}
   - component: {fileID: 1672009811}
+  - component: {fileID: 1672009813}
   m_Layer: 0
   m_Name: ShowInfo
   m_TagString: Untagged
@@ -7504,6 +7896,49 @@ Transform:
   - {fileID: 222305559}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1672009813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672009810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46606e48df68e494eb612131d97c0066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleHandler: {fileID: 882678584}
+  fireSprite: {fileID: -8868272330977153355, guid: 78761bd6a613543489f9dcc3d314ea85, type: 3}
+  maxHPFire: 0
+  damageFire: 0
+  armourFire: 0
+  speedFire: 0
+  energyFire: 1
+  waterSprite: {fileID: 0}
+  maxHPWater: 0
+  damageWater: 0
+  armourWater: 0
+  speedWater: 0
+  energyWater: 1
+  earthSprite: {fileID: 0}
+  maxHPEarth: 0
+  damageEarth: 0
+  armourEarth: 0
+  speedEarth: 0
+  energyEarth: 1
+  windSprite: {fileID: 0}
+  maxHPWind: 0
+  damageWind: 0
+  armourWind: 0
+  speedWind: 0
+  energyWind: 1
+  neutralSprite: {fileID: 0}
+  maxHPNeutral: 0
+  damageNeutral: 0
+  armourNeutral: 0
+  speedNeutral: 0
+  energyNeutral: 1
 --- !u!1 &1676286773
 GameObject:
   m_ObjectHideFlags: 0
@@ -8293,6 +8728,7 @@ GameObject:
   - component: {fileID: 1810416488}
   - component: {fileID: 1810416491}
   - component: {fileID: 1810416492}
+  - component: {fileID: 1810416493}
   m_Layer: 5
   m_Name: EndTurn
   m_TagString: Untagged
@@ -8473,6 +8909,19 @@ MonoBehaviour:
   name: End turn
   description: click to end turn
   enemyLibrary: {fileID: 0}
+--- !u!114 &1810416493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810416486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7471b1d46283a43aa713f469cc73f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaThreshold: 0.1
 --- !u!1 &1811698497
 GameObject:
   m_ObjectHideFlags: 0
@@ -10251,7 +10700,7 @@ GameObject:
   - component: {fileID: 2144936652}
   - component: {fileID: 2144936651}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: FormsBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10295,6 +10744,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1512650608}
   - {fileID: 348349174}
   - {fileID: 546515751}
   - {fileID: 95975597}
@@ -10304,7 +10754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -441.7, y: -42}
+  m_AnchoredPosition: {x: -441.7, y: 67}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
