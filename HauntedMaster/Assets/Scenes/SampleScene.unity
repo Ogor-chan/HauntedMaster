@@ -234,7 +234,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -439.21, y: -170.89}
-  m_SizeDelta: {x: 2.271, y: 2.4052}
+  m_SizeDelta: {x: 1.8, y: 1.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25217911
 MonoBehaviour:
@@ -312,8 +312,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -5210559474800057239, guid: 0cbc847fd0311254ea7dd80ca18ac437, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1853,7 +1853,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -441.85, y: -170.89}
-  m_SizeDelta: {x: 2.271, y: 2.4052}
+  m_SizeDelta: {x: 1.8, y: 1.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324940494
 MonoBehaviour:
@@ -1931,8 +1931,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -5210559474800057239, guid: 0cbc847fd0311254ea7dd80ca18ac437, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4867,7 +4867,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -444.66, y: -170.89}
-  m_SizeDelta: {x: 2.271, y: 2.4052}
+  m_SizeDelta: {x: 1.8, y: 1.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007960711
 MonoBehaviour:
@@ -4945,8 +4945,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -5210559474800057239, guid: 0cbc847fd0311254ea7dd80ca18ac437, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8394,9 +8394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleHandler: {fileID: 882678584}
-  attack1: {fileID: 1007960709}
-  attack2: {fileID: 324940492}
-  attack3: {fileID: 25217909}
   fireSprite: {fileID: -8868272330977153355, guid: 78761bd6a613543489f9dcc3d314ea85, type: 3}
   fireAttack1: {fileID: -5210559474800057239, guid: 0cbc847fd0311254ea7dd80ca18ac437, type: 3}
   fireAttack2: {fileID: -5210559474800057239, guid: 0cbc847fd0311254ea7dd80ca18ac437, type: 3}
