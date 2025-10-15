@@ -9,7 +9,7 @@ public class NeutralTestAttack : Attack
     {
         Name = "NeutralTestAttack";
         EnergyCost = 1;
-        Damage = 1;
+        Damage = 100;
         AttackElement = Element.neutral;
         Cooldown = 0;
         CurrentCooldown = 0;

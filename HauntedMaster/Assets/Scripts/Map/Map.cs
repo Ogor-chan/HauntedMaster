@@ -31,6 +31,8 @@ public class MapNode
     public GameObject NodeObject;
     public SpriteRenderer SpriteR;
     public MapNodeBehaviour NodeScript;
+    
+
 
     [Header("VisualData")]
     public bool AlreadyConnectedFrom;
@@ -54,6 +56,10 @@ public class Map : MonoBehaviour
     //3 - event, 4 - elite, 5 - boss
 
     MapBehaviour MB;
+    [Header("Scenes")]
+    public GameObject BattleScene;
+    public GameObject RestScene;
+    public GameObject ShopScene;
 
     [Header("Connecting")]
     [SerializeField] private float variation = 0.3f;
@@ -560,10 +566,18 @@ public class Map : MonoBehaviour
         {
             case NodeType.Fight:
                 MB.SpawnEncounter();
+                RestScene.SetActive(false);
+                ShopScene.SetActive(false);
                 break;
             case NodeType.Heal:
+                BattleScene.SetActive(false);
+                ShopScene.SetActive(false);
+                RestScene.SetActive(true);
                 break;
             case NodeType.Shop:
+                BattleScene.SetActive(false);
+                RestScene.SetActive(false);
+                ShopScene.SetActive(true);
                 break;
             case NodeType.Event:
                 break;
@@ -596,10 +610,26 @@ public class Map : MonoBehaviour
         MovedOnMap(FixedMapNodes[FixedMapNodes.Count - 1]);
     }
 
-    public void ShowMap()
+    public void ShowMap(int stan)
     {
         //CALL THIS AFTER MAPNODE EVENT HAS BEEN CONCLUDED
-        Mother.SetActive(true);
+
+        switch (stan)
+        {
+            case 0:
+                Mother.SetActive(true);
+                break;
+            case 1:
+                if (Mother.activeSelf)
+                {
+                    Mother.SetActive(false);
+                }
+                else
+                {
+                    Mother.SetActive(true);
+                }
+                break;
+        }
     }
 
     public void DeleteMap()

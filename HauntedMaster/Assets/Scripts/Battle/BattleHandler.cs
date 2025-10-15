@@ -38,6 +38,8 @@ public class BattleHandler : MonoBehaviour
     [SerializeField] private Transform StatusPosition7;
     [SerializeField] private Transform StatusPosition8;
 
+    Money money;
+
     [Header("")]
     public BattleState currentBattleState;
     public Character activeCharacter;
@@ -63,6 +65,7 @@ public class BattleHandler : MonoBehaviour
     private void Start()
     {
         MapScript = GameObject.Find("MapObject").GetComponent<Map>();
+        money = GameObject.Find("Item").GetComponent<Money>();
     }
 
     private IEnumerator BattleLoop()
@@ -181,7 +184,7 @@ public class BattleHandler : MonoBehaviour
         while (activeCharacter.CurrentHP <= 0 && turnOrder.Count > 0);
     }
 
-    private void CheckHP()
+    public void CheckHP()
     {
         for (int i = 0; i < playerCharacters.Count; i++)
         {
@@ -222,7 +225,8 @@ public class BattleHandler : MonoBehaviour
         turnOrder.Remove(DeadMonster);
         if (monsterCharacters.Count == 0)
         {
-            MapScript.ShowMap();
+            MapScript.ShowMap(0);
+            money.GainedMoney();
         }
     }
     private void NextCharTurn()
@@ -734,6 +738,8 @@ public class BattleHandler : MonoBehaviour
     {
         EnergyText.text = CurrentEnergy + "/" + MaxEnergy; 
     }
+
+
 
     public void AttackYouHave()
     {
