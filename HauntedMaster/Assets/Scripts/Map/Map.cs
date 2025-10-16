@@ -60,6 +60,7 @@ public class Map : MonoBehaviour
     public GameObject BattleScene;
     public GameObject RestScene;
     public GameObject ShopScene;
+    Rest RestSceneScript;
 
     [Header("Connecting")]
     [SerializeField] private float variation = 0.3f;
@@ -81,6 +82,7 @@ public class Map : MonoBehaviour
     private void Start()
     {
         MB = GameObject.Find("MapBehaviour").GetComponent<MapBehaviour>();
+        RestSceneScript = RestScene.GetComponent<Rest>();
         Mother = this.transform.Find("Mother").gameObject;
         CreateMap();
     }
@@ -566,18 +568,18 @@ public class Map : MonoBehaviour
         {
             case NodeType.Fight:
                 MB.SpawnEncounter();
-                RestScene.SetActive(false);
-                ShopScene.SetActive(false);
+                //RestScene.SetActive(false);
+                //ShopScene.SetActive(false);
                 break;
             case NodeType.Heal:
-                BattleScene.SetActive(false);
-                ShopScene.SetActive(false);
-                RestScene.SetActive(true);
+                //BattleScene.SetActive(false);
+                //ShopScene.SetActive(false);
+                RestSceneScript.RestPlaceLoad();
                 break;
             case NodeType.Shop:
-                BattleScene.SetActive(false);
-                RestScene.SetActive(false);
-                ShopScene.SetActive(true);
+                //BattleScene.SetActive(false);
+                //RestScene.SetActive(false);
+                //ShopScene.SetActive(true);
                 break;
             case NodeType.Event:
                 break;
