@@ -21,8 +21,23 @@ public class Rest : MonoBehaviour
 
     public void RestPlaceLoad()
     {
+        //Debug.Log("RestPlaceLoad");
+        //restCurrent = restAmount;
+        //Map.RestScene.SetActive(true);
+
+        Map = GameObject.Find("MapObject").GetComponent<Map>();
         Debug.Log("RestPlaceLoad");
         restCurrent = restAmount;
+        if (Map == null)
+        {
+            Debug.LogError("Map is null in RestPlaceLoad!");
+            return;
+        }
+        if (Map.RestScene == null)
+        {
+            Debug.LogError("Map.RestScene is null in RestPlaceLoad!");
+            return;
+        }
         Map.RestScene.SetActive(true);
     }
 

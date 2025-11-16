@@ -8,8 +8,8 @@ public class AOEWaterAttackTest : Attack
     {
         Name = "AoeWaterAttackTest";
         EnergyCost = 2;
-        Damage = 2;
-        AttackElement = Element.water;
+        Damage = 2000;
+        AttackElement = Element.neutral;
         Cooldown = 0;
         CurrentCooldown = 0;
     }

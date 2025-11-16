@@ -81,7 +81,7 @@ public class BattleHandler : MonoBehaviour
 
     public IEnumerator CheckBattleState()
     {
-        StatusBarCheck();
+        //StatusBarCheck();
 
         switch (currentBattleState)
         {

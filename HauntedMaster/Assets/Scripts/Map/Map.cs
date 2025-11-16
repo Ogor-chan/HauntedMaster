@@ -568,18 +568,13 @@ public class Map : MonoBehaviour
         {
             case NodeType.Fight:
                 MB.SpawnEncounter();
-                //RestScene.SetActive(false);
-                //ShopScene.SetActive(false);
+                SceneLoad("Battle");
                 break;
             case NodeType.Heal:
-                //BattleScene.SetActive(false);
-                //ShopScene.SetActive(false);
-                RestSceneScript.RestPlaceLoad();
+                SceneLoad("Rest");
                 break;
             case NodeType.Shop:
-                //BattleScene.SetActive(false);
-                //RestScene.SetActive(false);
-                //ShopScene.SetActive(true);
+                SceneLoad("Shop");
                 break;
             case NodeType.Event:
                 break;
@@ -595,6 +590,28 @@ public class Map : MonoBehaviour
         Mother.SetActive(false);
         UpdateAllNodeStatus();
 
+    }
+
+    public void SceneLoad(string scene)
+    {
+        switch (scene)
+        {
+            case "Battle":
+                BattleScene.SetActive(true);
+                RestScene.SetActive(false);
+                ShopScene.SetActive(false);
+                break;
+            case "Rest":
+                BattleScene.SetActive(false);
+                ShopScene.SetActive(false);
+                RestSceneScript.RestPlaceLoad();
+                break;
+            case "Shop":
+                BattleScene.SetActive(false);
+                RestScene.SetActive(false);
+                ShopScene.SetActive(true);
+                break;
+        }
     }
 
     public void CreateMap()
