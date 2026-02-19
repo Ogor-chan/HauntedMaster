@@ -5879,6 +5879,7 @@ MonoBehaviour:
   StatusPosition6: {fileID: 901684475}
   StatusPosition7: {fileID: 840773548}
   StatusPosition8: {fileID: 809978339}
+  battleStarter: {fileID: 564561894}
   currentBattleState: 0
   activeCharacter:
     Name: 

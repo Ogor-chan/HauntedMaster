@@ -8,7 +8,8 @@ public class Character
     public string Name;
     public Sprite CharacterSprite;
 
-    [HideInInspector] public int CurrentHP;
+    //[HideInInspector] 
+    public int CurrentHP;
     public int MaxHP;
     public int Damage;
     public int Armour;

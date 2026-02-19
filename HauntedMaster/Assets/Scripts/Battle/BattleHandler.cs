@@ -41,6 +41,7 @@ public class BattleHandler : MonoBehaviour
     Money money;
 
     [Header("")]
+    [HideInInspector]public BattleStarter battleStarter;
     public BattleState currentBattleState;
     public Character activeCharacter;
 
@@ -59,7 +60,7 @@ public class BattleHandler : MonoBehaviour
     private void Awake()
     {
         Utilities.CheckDamage += CheckHP;
-        
+
     }
 
     private void Start()
@@ -81,7 +82,7 @@ public class BattleHandler : MonoBehaviour
 
     public IEnumerator CheckBattleState()
     {
-        //StatusBarCheck();
+        StatusBarCheck();
 
         switch (currentBattleState)
         {
@@ -135,7 +136,7 @@ public class BattleHandler : MonoBehaviour
                 //MONSTER TURN
                 print("MONSTER TURN");
 
-                
+
                 MonsterAttack();
                 yield return new WaitForSeconds(1f);
                 isTurnOver = true;
@@ -188,10 +189,13 @@ public class BattleHandler : MonoBehaviour
     {
         for (int i = 0; i < playerCharacters.Count; i++)
         {
-            if(playerCharacters[i].CurrentHP <= 0)
+            if (playerCharacters[i].CurrentHP <= 0)
             {
                 print("Player had Died!");
                 ///////LOSE STATE MECHANIC TBA
+                ClearBattleData();
+                battleStarter.ClearBattleStarterData();
+                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
             }
             else
             {
@@ -201,20 +205,20 @@ public class BattleHandler : MonoBehaviour
         }
         for (int i = 0; i < monsterCharacters.Count; i++)
         {
-            if(monsterCharacters[i].CurrentHP <= 0)
+            if (monsterCharacters[i].CurrentHP <= 0)
             {
                 print("MONSTER DIED");
                 MonsterDeath(monsterCharacters[i]);
             }
             else
             {
-                monsterCharacters[i].WhichPosition.HPText.text 
+                monsterCharacters[i].WhichPosition.HPText.text
                     = monsterCharacters[i].CurrentHP + "/" + monsterCharacters[i].MaxHP;
             }
         }
         ChangeEnergy();
     }
-    
+
 
     private void MonsterDeath(Character DeadMonster)
     {
@@ -307,7 +311,7 @@ public class BattleHandler : MonoBehaviour
             {
                 print(targetMonster.Name + " Uses " + item.Name);
 
-                if(item.AttackTarget == Target.Enemy)
+                if (item.AttackTarget == Target.Enemy)
                 {
                     item.ExecuteAttack(playerCharacters.ToArray(), targetMonster, item);
                 }
@@ -326,7 +330,7 @@ public class BattleHandler : MonoBehaviour
     {
         Choosen = false;
 
-        if(targets[0] != null)
+        if (targets[0] != null)
         {
             Choosen = true;
         }
@@ -390,32 +394,32 @@ public class BattleHandler : MonoBehaviour
                     }
                 }
 
-                    if (activeCharacter.IsPlayer)
+                if (activeCharacter.IsPlayer)
+                {
+                    if (activeCharacter.stunned)
                     {
-                        if (activeCharacter.stunned)
-                        {
-                            activeCharacter.stunned = false;
-                            currentBattleState = BattleState.EndOfPlayerTurn;
-                        }
-                        else
-                        {
-                            currentBattleState = BattleState.PlayerTurn;
-
-                        }
+                        activeCharacter.stunned = false;
+                        currentBattleState = BattleState.EndOfPlayerTurn;
                     }
                     else
                     {
-                        if (activeCharacter.stunned)
-                        {
-                            activeCharacter.stunned = false;
-                            currentBattleState = BattleState.EndOfMonsterTurn;
-                        }
-                        else
-                        {
-                            currentBattleState = BattleState.MonsterTurn;
+                        currentBattleState = BattleState.PlayerTurn;
 
-                        }
                     }
+                }
+                else
+                {
+                    if (activeCharacter.stunned)
+                    {
+                        activeCharacter.stunned = false;
+                        currentBattleState = BattleState.EndOfMonsterTurn;
+                    }
+                    else
+                    {
+                        currentBattleState = BattleState.MonsterTurn;
+
+                    }
+                }
                 break;
             case StatusE.mud:
                 if (activeCharacter.StatusEffectList.Any(e => e.status == effect))
@@ -469,9 +473,9 @@ public class BattleHandler : MonoBehaviour
 
     public void StatusBarCheck()
     {
-        // If po to by se schowac to wszystko
+
         // Do usuwania na biezaco starych efektow
-        if (activeCharacter != null) 
+        if (activeCharacter != null)
         {
 
 
@@ -513,7 +517,7 @@ public class BattleHandler : MonoBehaviour
             foreach (StatusEffects effect in character.StatusEffectList)
             {
                 //========================DO PATRZENIA KTO CO DAJE=======================================
-                Debug.Log("Who: "+ activeCharacter.Name +" Status Effect: " + effect.status + " Stack: " + effect.stack);
+                Debug.Log("Who: " + activeCharacter.Name + " Status Effect: " + effect.status + " Stack: " + effect.stack);
                 //Debug.Log("Player Position: " + activeCharacter.WhichPosition.PositionObject.name);
 
                 //==========================DLA POZYCJI GRACZA===========================================
@@ -736,7 +740,7 @@ public class BattleHandler : MonoBehaviour
 
     public void ChangeEnergy()
     {
-        EnergyText.text = CurrentEnergy + "/" + MaxEnergy; 
+        EnergyText.text = CurrentEnergy + "/" + MaxEnergy;
     }
 
 
@@ -747,5 +751,20 @@ public class BattleHandler : MonoBehaviour
         {
             Debug.Log(playerCharacters[0].myAttacks[i].Name);
         }
+    }
+
+    public void ClearBattleData()
+    {
+        // Zatrzymaj coroutine walki, jeœli jest aktywna
+        if (battleLoopCoroutine != null)
+        {
+            StopCoroutine(battleLoopCoroutine);
+            battleLoopCoroutine = null;
+        }
+
+        // Wyczyœæ listy postaci
+        playerCharacters.Clear();
+        monsterCharacters.Clear();
+        turnOrder.Clear();
     }
 }

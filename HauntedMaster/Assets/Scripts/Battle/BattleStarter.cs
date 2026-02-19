@@ -21,6 +21,7 @@ public class BattleStarter : MonoBehaviour
     private void Start()
     {
         GameInitiater();
+        Debug.Log("ASDASDASDASDADADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     private void GameInitiater()
@@ -134,6 +135,24 @@ public class BattleStarter : MonoBehaviour
         print(TargetCharacter.Name + " Had occupied " + TargetCharacter.WhichPosition.index + "position");
     }
 
+    public void ClearBattleStarterData()
+    {
+        playerCharacter = null;
+        if (monsterCharacters != null)
+            monsterCharacters.Clear();
 
+        foreach (var pos in PositionsList)
+        {
+            pos.Active = false;
+            if (pos.PositionObject != null)
+                pos.PositionObject.SetActive(false);
+            if (pos.HPText != null)
+                pos.HPText.text = "";
+            if (pos.NameText != null)
+                pos.NameText.text = "";
+            if (pos.ImageRenderer != null)
+                pos.ImageRenderer.sprite = null;
+        }
+    }
 
 }
