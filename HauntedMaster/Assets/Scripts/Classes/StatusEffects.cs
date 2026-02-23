@@ -16,7 +16,7 @@ public enum StatusE
     insane
 }
 
-public class StatusEffects
+[System.Serializable]public class StatusEffects
 {
     public StatusE status;
     public int stack;

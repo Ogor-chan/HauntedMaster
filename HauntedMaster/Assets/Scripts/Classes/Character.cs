@@ -18,8 +18,8 @@ public class Character
 
     [HideInInspector] public bool IsPlayer;
     public Position WhichPosition;
-    [HideInInspector] public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
-    [HideInInspector] public bool stunned;
+    [SerializeField]public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
+    public bool stunned;
 
     public List<Attack> myAttacks = new List<Attack>();
 

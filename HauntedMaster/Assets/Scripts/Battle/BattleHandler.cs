@@ -41,6 +41,7 @@ public class BattleHandler : MonoBehaviour
     Money money;
 
     [Header("")]
+    public GameObject BTNblock;
     [HideInInspector]public BattleStarter battleStarter;
     public BattleState currentBattleState;
     public Character activeCharacter;
@@ -50,6 +51,8 @@ public class BattleHandler : MonoBehaviour
     public int CurrentEnergy;
 
     private bool isTurnOver;
+    private bool isPlayerTurnOver = false;
+    private int playerTurnCounter = 0;
     private bool Choosen = true;
     private Character[] TempCharArray = new Character[1];
 
@@ -71,6 +74,7 @@ public class BattleHandler : MonoBehaviour
 
     private IEnumerator BattleLoop()
     {
+        Debug.LogWarning("START BATTLE STATE");
         while (currentBattleState != BattleState.EndOfBattle)
         {
             yield return StartCoroutine(CheckBattleState());
@@ -82,36 +86,41 @@ public class BattleHandler : MonoBehaviour
 
     public IEnumerator CheckBattleState()
     {
-        StatusBarCheck();
+        
 
         switch (currentBattleState)
         {
             case BattleState.StartOfBattle:
-
+                BTNblock.SetActive(true);
                 //ACTIVATE START OF BATTLE EFFECTS
                 print("START OF BATTLE");
 
                 NextCharTurn();
+                StatusBarCheck(1);
                 break;
             case BattleState.StartOfPlayerTurn:
-
+                
                 //ACTIVATE START OF TURN EFFECTS FOR PLAYER
                 print("START OF PLAYER TURN");
                 CheckHP();
                 ActivateStatus(StatusE.stun);
+                StatusBarCheck(0);
 
                 break;
             case BattleState.PlayerTurn:
-
+                playerTurnCounter++;
+                Debug.LogWarning("PLAYER TURN NUMBER: " + playerTurnCounter);
                 //PLAYER TURN
                 print("PLAYER TURN");
-
-                yield return new WaitUntil(() => isTurnOver);
-                isTurnOver = false;
+                BTNblock.SetActive(false);
+                yield return new WaitUntil(() => isPlayerTurnOver);
+                isPlayerTurnOver = false;
                 currentBattleState = BattleState.EndOfPlayerTurn;
+                StatusBarCheck(0);
+
                 break;
             case BattleState.EndOfPlayerTurn:
-
+                BTNblock.SetActive(true);
                 //ACTIVATE END OF TURN EFFECTS FOR PLAYER
                 print("END OF PLAYER TURN");
 
@@ -121,15 +130,16 @@ public class BattleHandler : MonoBehaviour
                 CurrentEnergy = MaxEnergy;
                 NextCharacter();
                 NextCharTurn();
-
+                StatusBarCheck(0);
                 break;
             case BattleState.StartOfMonsterTurn:
 
+                BTNblock.SetActive(true);
                 //ACTIVATE START OF TURN EFFECTS FOR ACTIVE MONSTER
                 print("START OF MONSTER TURN");
 
                 ActivateStatus(StatusE.stun);
-
+                StatusBarCheck(0);
                 break;
             case BattleState.MonsterTurn:
 
@@ -143,6 +153,7 @@ public class BattleHandler : MonoBehaviour
                 yield return new WaitUntil(() => isTurnOver);
                 isTurnOver = false;
                 currentBattleState = BattleState.EndOfMonsterTurn;
+                StatusBarCheck(0);
                 break;
             case BattleState.EndOfMonsterTurn:
 
@@ -154,17 +165,20 @@ public class BattleHandler : MonoBehaviour
 
                 NextCharacter();
                 NextCharTurn();
-
+                StatusBarCheck(0);
                 break;
             case BattleState.EndOfBattle:
                 //ACTIVATE END OF BATTLE EFFECTS
                 print("END OF BATTLE");
+                
                 break;
         }
     }
 
     public void BattleStarted()
     {
+
+
         activeCharacter = turnOrder[0];
         currentBattleState = BattleState.StartOfBattle;
         isTurnOver = false;
@@ -231,6 +245,9 @@ public class BattleHandler : MonoBehaviour
         {
             MapScript.ShowMap(0);
             money.GainedMoney();
+            StatusBarCheck(1);
+            BTNblock.SetActive(false);
+            StopAllCoroutines();
         }
     }
     private void NextCharTurn()
@@ -361,7 +378,7 @@ public class BattleHandler : MonoBehaviour
 
     public void EndTurnButton()
     {
-        isTurnOver = true;
+        isPlayerTurnOver = true;
     }
 
     public void ActivateStatus(StatusE effect)
@@ -399,7 +416,9 @@ public class BattleHandler : MonoBehaviour
                     if (activeCharacter.stunned)
                     {
                         activeCharacter.stunned = false;
-                        currentBattleState = BattleState.EndOfPlayerTurn;
+                        currentBattleState = BattleState.PlayerTurn;
+                        CurrentEnergy = 0;
+                        BTNblock.SetActive(true);
                     }
                     else
                     {
@@ -471,7 +490,7 @@ public class BattleHandler : MonoBehaviour
         }
     }
 
-    public void StatusBarCheck()
+    public void StatusBarCheck(int option) // 0 - normal check, 1 - clear effect list
     {
 
         // Do usuwania na biezaco starych efektow
@@ -517,11 +536,21 @@ public class BattleHandler : MonoBehaviour
             foreach (StatusEffects effect in character.StatusEffectList)
             {
                 //========================DO PATRZENIA KTO CO DAJE=======================================
-                Debug.Log("Who: " + activeCharacter.Name + " Status Effect: " + effect.status + " Stack: " + effect.stack);
+                Debug.Log("Who: " + character.Name + " Status Effect: " + effect.status + " Stack: " + effect.stack);
                 //Debug.Log("Player Position: " + activeCharacter.WhichPosition.PositionObject.name);
 
+
+
+                //========================DO CZYSZCZENIA STATUSÓW=======================================
+
+                if (option == 1)
+                {
+                    character.StatusEffectList.Clear();
+                    print("==================================================================reset" );
+                }
+
                 //==========================DLA POZYCJI GRACZA===========================================
-                if (activeCharacter.WhichPosition.PositionObject.name == "Position0")
+                if (character.WhichPosition.PositionObject.name == "Position0" && option == 0)
                 {
                     if (effect.status.ToString() == "bleed")
                     {
@@ -556,7 +585,7 @@ public class BattleHandler : MonoBehaviour
                 }
 
                 //==========================DLA POZYCJI WROGA 4 =========================================
-                if (activeCharacter.WhichPosition.PositionObject.name == "Position4")
+                if (character.WhichPosition.PositionObject.name == "Position4" && option == 0)
                 {
 
                     if (effect.status.ToString() == "bleed")
@@ -592,7 +621,7 @@ public class BattleHandler : MonoBehaviour
                 }
 
                 //==========================DLA POZYCJI WROGA 5 =========================================
-                if (activeCharacter.WhichPosition.PositionObject.name == "Position5")
+                if (character.WhichPosition.PositionObject.name == "Position5" && option == 0)
                 {
 
                     if (effect.status.ToString() == "bleed")
@@ -628,7 +657,7 @@ public class BattleHandler : MonoBehaviour
                 }
 
                 //==========================DLA POZYCJI WROGA 6 =========================================
-                if (activeCharacter.WhichPosition.PositionObject.name == "Position6")
+                if (character.WhichPosition.PositionObject.name == "Position6" && option == 0)
                 {
 
                     if (effect.status.ToString() == "bleed")
@@ -664,7 +693,7 @@ public class BattleHandler : MonoBehaviour
                 }
 
                 //==========================DLA POZYCJI WROGA 7 =========================================
-                if (activeCharacter.WhichPosition.PositionObject.name == "Position7")
+                if (character.WhichPosition.PositionObject.name == "Position7" && option == 0)
                 {
 
                     if (effect.status.ToString() == "bleed")
@@ -700,7 +729,7 @@ public class BattleHandler : MonoBehaviour
                 }
 
                 //==========================DLA POZYCJI WROGA 8 =========================================
-                if (activeCharacter.WhichPosition.PositionObject.name == "Position8")
+                if (character.WhichPosition.PositionObject.name == "Position8" && option == 0)
                 {
 
                     if (effect.status.ToString() == "bleed")
