@@ -79,10 +79,7 @@ public class changeForm : MonoBehaviour
 
     public void FormChange(string name)
     {
-        if (battleHandler.CurrentEnergy > 0)
-        {
-            battleHandler.playerCharacters[0].myAttacks.Clear();
-        }
+        
         Image img1 = attack1.GetComponent<Image>();
         Image img2 = attack2.GetComponent<Image>();
         Image img3 = attack3.GetComponent<Image>();
@@ -99,9 +96,7 @@ public class changeForm : MonoBehaviour
                     //battleHandler.activeCharacter.Speed = speedFire;
                     Debug.Log("Fire form selected");
                     battleHandler.ChangeEnergy();
-                    battleHandler.playerCharacters[0].myAttacks.Add(new FireTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new FireTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new FireTestAttack());
+                    battleHandler.playerElementAttackSet = 3;
                     img1.sprite = fireAttack1;
                     img1.color = Color.red;
                     img2.sprite = fireAttack2;
@@ -123,9 +118,7 @@ public class changeForm : MonoBehaviour
                     //battleHandler.activeCharacter.Speed = speedWater;
                     Debug.Log("Water form selected");
                     battleHandler.ChangeEnergy();
-                    battleHandler.playerCharacters[0].myAttacks.Add(new WaterTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new AOEWaterAttackTest());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new WaterTestAttack());
+                    battleHandler.playerElementAttackSet = 6;
                     img1.sprite = waterAttack1;
                     img1.color = Color.blue;
                     img2.sprite = waterAttack2;
@@ -146,9 +139,7 @@ public class changeForm : MonoBehaviour
                     //battleHandler.activeCharacter.Speed = speedEarth;
                     Debug.Log("Earth form selected");
                     battleHandler.ChangeEnergy();
-                    battleHandler.playerCharacters[0].myAttacks.Add(new EarthTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new EarthTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new EarthTestAttack());
+                    battleHandler.playerElementAttackSet = 9;
                     img1.sprite = earthAttack1;
                     img1.color = new Color(0.6f, 0.3f, 0.1f);
                     img2.sprite = earthAttack2;
@@ -169,9 +160,7 @@ public class changeForm : MonoBehaviour
                     //battleHandler.activeCharacter.Speed = speedWind;
                     Debug.Log("Wind form selected");
                     battleHandler.ChangeEnergy();
-                    battleHandler.playerCharacters[0].myAttacks.Add(new WindTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new WindTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new WindTestAttack());
+                    battleHandler.playerElementAttackSet = 12;
                     img1.sprite = windAttack1;
                     img1.color = Color.white;
                     img2.sprite = windAttack2;
@@ -192,9 +181,7 @@ public class changeForm : MonoBehaviour
                     //battleHandler.activeCharacter.Speed = speedNeutral;
                     Debug.Log("Neutral form selected");
                     battleHandler.ChangeEnergy();
-                    battleHandler.playerCharacters[0].myAttacks.Add(new NeutralTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new NeutralTestAttack());
-                    battleHandler.playerCharacters[0].myAttacks.Add(new NeutralTestAttack());
+                    battleHandler.playerElementAttackSet = 0;
                     img1.sprite = neutralAttack1;
                     img1.color = Color.gray;
                     img2.sprite = neutralAttack2;

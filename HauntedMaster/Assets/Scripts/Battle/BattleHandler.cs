@@ -41,6 +41,7 @@ public class BattleHandler : MonoBehaviour
     Money money;
 
     [Header("")]
+    public int playerElementAttackSet = 0;
     public GameObject BTNblock;
     [HideInInspector]public BattleStarter battleStarter;
     public BattleState currentBattleState;
@@ -257,7 +258,7 @@ public class BattleHandler : MonoBehaviour
     }
     public void TestAttack1()
     {
-        Attack usedAttack = playerCharacters[0].myAttacks[0];
+        Attack usedAttack = playerCharacters[0].myAttacks[playerElementAttackSet];
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
             return;
@@ -272,7 +273,7 @@ public class BattleHandler : MonoBehaviour
 
     public void TestAttack2()
     {
-        Attack usedAttack = playerCharacters[0].myAttacks[1];
+        Attack usedAttack = playerCharacters[0].myAttacks[playerElementAttackSet+1];
 
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
@@ -287,7 +288,7 @@ public class BattleHandler : MonoBehaviour
     }
     public void TestAttack3()
     {
-        Attack usedAttack = playerCharacters[0].myAttacks[2];
+        Attack usedAttack = playerCharacters[0].myAttacks[playerElementAttackSet+2];
         if (CurrentEnergy < usedAttack.EnergyCost)
         {
             return;

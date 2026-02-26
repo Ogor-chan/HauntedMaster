@@ -75,15 +75,33 @@ public class ShowInfo : MonoBehaviour
                 {
                     if (hit.collider.name == "Attack1")
                     {
-                        PlayerAttackInfo(battleHandler.playerCharacters[0].myAttacks[0].Name, battleHandler.playerCharacters[0].myAttacks[0].EnergyCost.ToString(), battleHandler.playerCharacters[0].myAttacks[0].Damage.ToString(), battleHandler.playerCharacters[0].myAttacks[0].AttackElement.ToString(), battleHandler.playerCharacters[0].myAttacks[0].Cooldown.ToString(), battleHandler.playerCharacters[0].myAttacks[0].CurrentCooldown.ToString());
+                        PlayerAttackInfo(
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet].Name,
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet].EnergyCost.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet].Damage.ToString(),
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet].AttackElement.ToString(),
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet].Cooldown.ToString(),
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet].CurrentCooldown.ToString());
                     }
                     else if (hit.collider.name == "Attack2")
                     {
-                        PlayerAttackInfo(battleHandler.playerCharacters[0].myAttacks[1].Name, battleHandler.playerCharacters[0].myAttacks[1].EnergyCost.ToString(), battleHandler.playerCharacters[0].myAttacks[1].Damage.ToString(), battleHandler.playerCharacters[0].myAttacks[1].AttackElement.ToString(), battleHandler.playerCharacters[0].myAttacks[1].Cooldown.ToString(), battleHandler.playerCharacters[0].myAttacks[1].CurrentCooldown.ToString());
+                        PlayerAttackInfo(
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 1].Name, 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 1].EnergyCost.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 1].Damage.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 1].AttackElement.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 1].Cooldown.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 1].CurrentCooldown.ToString());
                     }
                     else if (hit.collider.name == "Attack3")
                     {
-                        PlayerAttackInfo(battleHandler.playerCharacters[0].myAttacks[2].Name, battleHandler.playerCharacters[0].myAttacks[2].EnergyCost.ToString(), battleHandler.playerCharacters[0].myAttacks[2].Damage.ToString(), battleHandler.playerCharacters[0].myAttacks[2].AttackElement.ToString(), battleHandler.playerCharacters[0].myAttacks[2].Cooldown.ToString(), battleHandler.playerCharacters[0].myAttacks[2].CurrentCooldown.ToString());
+                        PlayerAttackInfo(
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 2].Name, 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 2].EnergyCost.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 2].Damage.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 2].AttackElement.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 2].Cooldown.ToString(), 
+                            battleHandler.playerCharacters[0].myAttacks[battleHandler.playerElementAttackSet + 2].CurrentCooldown.ToString());
                     }
                     
                 }

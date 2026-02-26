@@ -21,7 +21,7 @@ public class Character
     [SerializeField]public List<StatusEffects> StatusEffectList = new List<StatusEffects>();
     public bool stunned;
 
-    public List<Attack> myAttacks = new List<Attack>();
+    [SerializeField] public List<Attack> myAttacks = new List<Attack>();
 
     public Character(string name,int maxHP, int damage, int armour, int speed, Element myElement)
     {

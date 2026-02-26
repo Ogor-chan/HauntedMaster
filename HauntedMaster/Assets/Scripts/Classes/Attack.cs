@@ -7,7 +7,7 @@ public enum Target
     Enemy,
     Team
 }
-public abstract class Attack
+[System.Serializable]public abstract class Attack
 {
     public string Name { get; set; }
     public string Description { get; set; }

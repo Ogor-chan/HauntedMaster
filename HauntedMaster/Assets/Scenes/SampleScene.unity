@@ -5880,6 +5880,7 @@ MonoBehaviour:
   StatusPosition6: {fileID: 901684475}
   StatusPosition7: {fileID: 840773548}
   StatusPosition8: {fileID: 809978339}
+  playerElementAttackSet: 0
   BTNblock: {fileID: 982722677}
   battleStarter: {fileID: 564561894}
   currentBattleState: 0

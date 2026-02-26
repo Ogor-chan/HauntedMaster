@@ -21,7 +21,6 @@ public class BattleStarter : MonoBehaviour
     private void Start()
     {
         GameInitiater();
-        Debug.Log("ASDASDASDASDADADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     private void GameInitiater()
@@ -81,13 +80,36 @@ public class BattleStarter : MonoBehaviour
         playerCharacter.IsPlayer = true;
         playerCharacter.CharacterSprite = playerSprite;
 
-        playerCharacter.myAttacks.Add(new NeutralTestAttack());
-        playerCharacter.myAttacks.Add(new AOEWaterAttackTest());
-        playerCharacter.myAttacks.Add(new EarthTestAttack());
+        AddPlayerAttacks();
 
         playerCharacter.WhichPosition = PositionsList[0];
     }
 
+    private void AddPlayerAttacks()
+    {
+        // Element Neutral  [0] [1] [2]
+        playerCharacter.myAttacks.Add(new NeutralTestAttack());
+        playerCharacter.myAttacks.Add(new AOEWaterAttackTest());
+        playerCharacter.myAttacks.Add(new EarthTestAttack());
+        // Elememt Fire     [3] [4] [5]
+        playerCharacter.myAttacks.Add(new FireTestAttack());
+        playerCharacter.myAttacks.Add(new FireTestAttack());
+        playerCharacter.myAttacks.Add(new FireTestAttack());
+        // Element Water    [6] [7] [8]
+        playerCharacter.myAttacks.Add(new WaterTestAttack());
+        playerCharacter.myAttacks.Add(new AOEWaterAttackTest());
+        playerCharacter.myAttacks.Add(new WaterTestAttack());
+        // Element Earth    [9] [10] [11]
+        playerCharacter.myAttacks.Add(new EarthTestAttack());
+        playerCharacter.myAttacks.Add(new EarthTestAttack());
+        playerCharacter.myAttacks.Add(new EarthTestAttack());
+        // Element Wind      [12] [13] [14]
+        playerCharacter.myAttacks.Add(new WindTestAttack());
+        playerCharacter.myAttacks.Add(new WindTestAttack());
+        playerCharacter.myAttacks.Add(new WindTestAttack());
+
+        Debug.LogWarning(playerCharacter.myAttacks.Count);
+    }
 
     private void OccupyPosition(Character TargetCharacter)
     {
