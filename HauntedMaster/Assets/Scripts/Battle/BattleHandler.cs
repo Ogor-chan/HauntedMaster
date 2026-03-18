@@ -127,6 +127,8 @@ public class BattleHandler : MonoBehaviour
 
                 ActivateStatus(StatusE.burn);
                 ActivateStatus(StatusE.mud);
+                ActivateStatus(StatusE.bleed);
+                ActivateStatus(StatusE.poison);
 
                 CurrentEnergy = MaxEnergy;
                 NextCharacter();
